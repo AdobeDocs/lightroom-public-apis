@@ -12,36 +12,30 @@
 
 module.exports = {
   siteMetadata: {
-    versions: [
-      {
-        title: 'v2.0',
-        selected: true
-      },
-      {
-        title: 'v1.4',
-        path: 'https://github.com/AdobeDocs/analytics-1.4-apis'
-      }
-    ],
     pages: [
       {
-        title: 'Adobe Analytics',
+        title: 'Lightroom API Overview',
         path: '/'
+      },
+      {
+        title: 'Get Started',
+        path: '/getting-started/'
       },
       {
         title: 'Guides',
         path: '/guides/'
       },
       {
+        title: 'Code Samples',
+        path: '/code-sample/'
+      },
+      {
         title: 'API Reference',
-        menu: [{
-          title: 'API Reference v2.0',
-          description: 'Adobe Analytics Reporting API',
-          path: '/api/index.md'
-        }, {
-          title: 'API Reference v1.4',
-          description: 'API Spec for the Adobe Marketing Cloud',
-          path: '/api/1.4.md'
-        }]
+        path: '/api/index.md'
+      },
+      {
+        title: 'Release Notes',
+        path: '/release-notes/'
       },
       {
         title: 'Support',
@@ -50,74 +44,68 @@ module.exports = {
     ],
     subPages: [
       {
-        title: 'Get Started',
+        title: 'Getting Started',
+        path: '/getting-started/',
+        pages: [
+          {
+            title: 'Create an Integration',
+            path: '/getting-started/create_integration/'
+          },
+          {
+            title: 'Services Health Check',
+            path: '/getting-started/service_health_check/'
+          },
+          {
+            title: 'Authenticate Customers',
+            path: '/getting-started/authenticate_customers/'
+          },
+          {
+            title: 'Upload Content',
+            path: '/getting-started/upload_content/'
+          },
+          {
+            title: 'Manage Content',
+            path: '/getting-started/manage_content/'
+          },
+          {
+            title: 'Read and Generate Renditions',
+            path: '/getting-started/read_generate_renditions/'
+          },
+          {
+            title: 'Developer Guidelines',
+            path: '/getting-started/developer_guidelines/'
+          },
+          {
+            title: 'Branding Guidelines',
+            path: '/getting-started/branding_guidelines/'
+          }
+        ]
+      },
+      {
+        title: 'Using the Lightroom APIs',
         path: '/guides/',
         pages: [
           {
-            title: 'Overview',
-            path: '/guides/'
+            title: 'Calling a Lightroom API',
+            path: '/guides/calling_api/'
           },
           {
-            title: 'Creating an OAuth Client',
-            path: '/guides/creating_oauth_client/'
+            title: 'Primitive Data Types',
+            path: '/guides/primitive_data_types/'
           },
           {
-            title: 'OAuth using cURL',
-            path: '/guides/oauth_using_curl/'
+            title: 'Common Data Model',
+            path: '/guides/common_data_model/'
           },
           {
-            title: 'OAuth using POSTMAN',
-            path: '/guides/oauth_using_postman/'
-          },
-          {
-            title: 'JWT Authentication',
-            path: '/guides/jwt_authentication/'
+            title: 'Links and Pagination',
+            path: '/guides/links_and_pagination/'
           }
         ]
       },
       {
-        title: 'Reporting API',
-        path: '/guides/reporting_api/',
-        pages: [
-          {
-            title: 'Overview',
-            path: '/guides/reporting_api/'
-          },
-          {
-            title: 'Reporting with breakdowns',
-            path: '/guides/reporting_api/reporting_breakdowns/',
-            pages: [
-              {
-                title: 'Reporting with single breakdowns',
-                path: '/guides/reporting_api/reporting_breakdowns/',
-              },
-              {
-                title: 'Reporting with multiple breakdowns',
-                path: '/guides/reporting_api/reporting_breakdowns/reporting_multiple_breakdowns/',
-              },
-            ]
-          },
-          {
-            title: 'Reporting tips and tricks',
-            path: '/guides/reporting_api/reporting_tips_tricks/'
-          }
-        ]
-      },
-      {
-        title: 'Discovery API',
-        path: '/guides/discovery_api/'
-      },
-      {
-        title: 'Segments API',
-        path: '/guides/segments_api/'
-      },
-      {
-        title: 'Calculated Metrics API',
-        path: '/guides/calculated_metrics_api/'
-      },
-      {
-        title: 'Migrating',
-        path: '/guides/migrating/'
+        title: 'Sample Code',
+        path: '/code-sample/'
       },
       {
         title: 'Overview',
@@ -148,9 +136,13 @@ module.exports = {
             path: '/support/community/'
           }
         ]
+      },
+      {
+        title: 'API Change Logs',
+        path: '/release-notes/'
       }
     ]
   },
   plugins: [`@adobe/gatsby-theme-aio`],
-  pathPrefix: process.env.PATH_PREFIX || '/dev-site-documentation-template/'
+  pathPrefix: process.env.PATH_PREFIX || '/lightroom/lightroom-api-docs/'
 };

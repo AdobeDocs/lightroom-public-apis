@@ -1,8 +1,15 @@
-## Lightroom Services
+---
+title: Getting Started with Lightroom
+description: Page for Getting Started
+contributors:
+  - https://github.com/bagra98
+---
+
+# Getting started with Lightroom API
 
 Adobe Photoshop Lightroom stores user _assets_, with their associated metadata and media renditions, in a _catalog_ in the cloud.
 
-### Accessing Lightroom Content
+## Accessing Lightroom Content
 
 Lightroom content of a Creative Cloud customer is managed through a set of RESTful APIs. These APIs are available only to entitled partner applications that have authenticated the customer, and the customer has given their express permission to the client to act on their behalf. The [API Reference](https://www.adobe.io/apis/creativecloud/lightroom/apidocs.html) documents the available APIs.
 

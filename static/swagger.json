@@ -1,0 +1,876 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Lightroom API Documentation, made available through [adobe.io](https://www.adobe.io). API Change Logs are available [here](https://bagra98.github.io/lightroom-public-apis/release-notes/).",
+        "version": "1.0.0",
+        "title": "Lightroom API Documentation",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://image.adobe.io/"
+        }
+    ],
+    "tags": [
+        {
+            "name": "health",
+            "description": "Lightroom Services status.",
+            "externalDocs": {
+                "description": "More info",
+                "url": "https://www.adobe.io"
+            }
+        },
+        {
+            "name": "accounts",
+            "description": "Account information for the authenticated user."
+        },
+        {
+            "name": "catalogs",
+            "description": "Catalog information for the authenticated user."
+        },
+        {
+            "name": "assets",
+            "description": "Information for assets, typically images or videos."
+        },
+        {
+            "name": "albums",
+            "description": "Information for albums, which contain references to zero or more assets."
+        }
+    ],
+    "paths": {
+        "/v2/health": {
+            "get": {
+                "tags": [
+                    "health"
+                ],
+                "summary": "Lightroom Services health check",
+                "description": "Will return the Lightroom server version ID (a hexadecimal value not guaranteed to be sequential) if the services are up.",
+                "operationId": "getHealth",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                    "name": "X-API-Key",
+                    "in": "header",
+                    "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "version": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request failed because the API Key is not valid.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "enum": [ 403003 ]
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "enum": [ "API Key is invalid" ]
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/ServiceUnavailable"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "BadRequestGUID": {
+                "description": "The request failed due to an invalid resource identifier.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "<param_name>": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "Must be a valid GUID"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestJSON": {
+                "description": "The request failed due to an invalid JSON.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "body": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "Must be valid JSON"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestSubtype": {
+                "description": "The request failed due to an invalid subtype.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "<subtype>": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "is invalid"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestPayload": {
+                "description": "The request failed due to an invalid payload. The errors hash returned will specify which payload keys had issues and whether the value was invalid, whether the key is required and missing, or whether the key is not allowed.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "payload.<key>.<subkey>": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "invalid", "disallowed", "required" ]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1030 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Payload Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestAssetIds": {
+                "description": "The request failed as no other parameter is allowed with asset_ids parameter.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "<param_name>": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "not allowed with asset_ids parameter"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestGroup": {
+                "description": "The request failed due one of the subtype does not supported group. Only preset or profile supports group parameter.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "group": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "group not expected for each given subtype"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestName": {
+                "description": "The request failed due to one of the subtype does not supported group. Only preset or profile supports name parameter.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": ["name not expected for each given subtype"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestFavorite": {
+                "description": "The request failed due to invalid favorite status. Currently only true is supported.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "favorite": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": ["favorite query param can only be true. favorite=false not supported"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestMissingParameter": {
+                "description": "The request failed due to missing parameter.",
+                "schema": {
+                    "type": "object",
+                        "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "parameter": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": ["must be specified"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestMissingSubtypeWithGroupOrName": {
+                "description": "The request failed due to missing subtype. This error can occur if group or name parameter is included in the request.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "subtype": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": ["subtype value expected with group or name"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestMissingSubtypeWithFavorite": {
+                "description": "The request failed due to missing subtype. This error can occur if favorite is included in the request.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "subtype": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": ["subtype value expected with favorite"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "BadRequestInvalidDateTime": {
+                "description": "The request failed due to invalid date/time.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "<param_name>": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "must be a valid XML Schema dateTime"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1005 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Input Validation Error" ]
+                        }
+                    }
+                }
+            },
+            "Unauthorized": {
+                "description": "The request failed due to missing or invalid authentication token."
+            },
+            "ForbiddenKey": {
+                "description": "The request failed because the API Key is not valid.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 403003 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "API Key is invalid" ]
+                        }
+                    }
+                }
+            },
+            "ForbiddenAccount": {
+                "description": "The request failed due to the account state.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 4301 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Access forbidden due to account state of resource owner" ]
+                        }
+                    }
+                }
+            },
+            "ForbiddenExists": {
+                "description": "The request failed due to the account state.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "<resource_type>": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "already exists"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1002 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Resource already exists" ]
+                        }
+                    }
+                }
+            },
+            "ForbiddenQuota": {
+                "description": "The request failed due to insufficient storage under the entitlement.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "<asset_id>": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "quota exceeded"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1043 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Too many assets" ]
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "The request failed due to insufficient permissions.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 4300 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Access is forbidden" ]
+                        }
+                    }
+                }
+            },
+            "ForbiddenClient": {
+                "description": "The request failed because the client application must be upgraded.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 4999 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Upgrade required" ]
+                        },
+                        "links": {
+                            "type": "object",
+                            "properties": {
+                                "/rels/client_app": {
+                                    "type": "object",
+                                    "properties": {
+                                        "href": {
+                                            "type": "string",
+                                            "enum": ["<app_url> (Link to the where to find a new version of the client application)"]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ForbiddenOperation": {
+                "description": "The request failed because the request operation is not permitted",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1016 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Requested operation not permitted" ]
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "The request failed because the resource being requested does not exist.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "<resource_type>": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "does not exist"]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1000 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Resource not found" ]
+                        }
+                    }
+                }
+            },
+            "PreconditionFailed": {
+                "description": "The request failed because one or more orginal files matching the provided SHA-256 hash already exists. The response body lists the matching original files.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "base" : {
+                            "type": "string",
+                            "description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
+                        },
+                        "revisions": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "$ref": "#/definitions/uuid"
+                                    },
+                                    "created": {
+                                        "$ref": "#/definitions/utcDateTime"
+                                    },
+                                    "created_by": {
+                                        "$ref": "#/definitions/uuid"
+                                    },
+                                    "updated": {
+                                        "$ref": "#/definitions/utcDateTime"
+                                    },
+                                    "links": {
+                                        "type": "object"
+                                    },
+                                    "payload": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "example": {
+                        "base": "<base_url>",
+                        "resources": [
+                            {
+                            "id": "<asset_id>",
+                            "created": "<created_date>",
+                            "created_by": "<account_id>",
+                            "updated": "<updated_date>",
+                            "links": {
+                                "self": {
+                                    "href": "assets/<asset_id>"
+                                },
+                                "/rels/master_create": {
+                                    "href": "assets/<asset_id>/master"
+                                },
+                                "/rels/xmp_develop_create": {
+                                    "href": "assets/<asset_id>/xmp/develop"
+                                },
+                                "/rels/rendition_type/<rendition_type>": {
+                                    "href": "assets/<asset_id>/renditions/<rendition_type>"
+                                },
+                                "/rels/xmp/develop": {
+                                    "href": "assets/<asset_id>/xmp/develop",
+                                    "invalid": "true",
+                                    "fileSize": "<external_xmp_develop_setting_file_size>"
+                                }
+                            },
+                            "payload": {
+                                "captureDate": "<image_capture_date>",
+                                "importSource": {
+                                    "fileName": "<file_name>",
+                                    "fileSize": "<image_file_size>",
+                                    "originalWidth": "<image_width>",
+                                    "originalHeight": "<image_height>",
+                                    "sha256": "<image_sha256>",
+                                    "importedOnDevice": "<import_device_name>",
+                                    "importedBy": "<import_account_id>",
+                                    "importTimestamp": "<import_time>"
+                                },
+                                "<key>": "<value>",
+                                "develop": {
+                                    "<dev_key>": "<dev_value>"
+                                }
+                            }
+                            }
+                        ]
+                    }
+                }
+            },
+            "TooLarge": {
+                "description": "The request failed because it is too large.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1007 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "The resource is too big" ]
+                        }
+                    }
+                }
+            },
+            "UnsupportedMediaType": {
+                "description": "The request failed because the Content-Type did not match the request.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "errors": {
+                            "type": "object",
+                            "properties": {
+                                "content_type": {
+                                    "type": "array",
+                                    "items": {
+                                    "type": "string",
+                                    "enum": [ "should be json", "should match the subtype of the asset" ]
+                                    }
+                                }
+                            }
+                        },
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 1003 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Invalid content type" ]
+                        }
+                    }
+                }
+            },
+            "ServiceUnavailable": {
+                "description": "The request failed because the service is temporarily unavailable. Try again later.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "enum": [ 9999 ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "enum": [ "Service is temporarily unavailable" ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "iso8601DateTime": {
+            "description": "datetime in ISO-8601 format (e.g. 2016-01-15T16:18:00-05:00) with both date and time required, including seconds, but timezone optional. Also flexible on allowing some nonstandard timezone formats like 2016-01-15T12:10:32+0000 or 2016-01-15T12:10:32-05.",
+            "type": "string",
+            "pattern": "^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3})-((02-([1-2][0-9]|0[1-9]))|((01|03|05|07|08|10|12)-(3[0-1]|[1-2][0-9]|0[1-9]))|((04|06|09|11)-(30|[1-2][0-9]|0[1-9])))T(2[0-3]|[0-1][0-9]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(((\\+|-)(2[0-3]|[0-1][0-9])(:?[0-5][0-9])?)|Z)?$"
+        },
+        "utcDateTime": {
+            "description": "datetime in RFC-3339 format (subset of ISO-8601) requiring a UTC time ending with Z (so -00:00 or +00-00 suffix NOT allowed). The datetime must have date and time, including seconds, e.g. 2016-01-15T09:23:34Z.",
+            "type": "string",
+            "pattern": "^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3})-((02-([1-2][0-9]|0[1-9]))|((01|03|05|07|08|10|12)-(3[0-1]|[1-2][0-9]|0[1-9]))|((04|06|09|11)-(30|[1-2][0-9]|0[1-9])))T(2[0-3]|[0-1][0-9]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?Z$"
+        },
+        "max1024CharacterString": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+        },
+        "uuid": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+        },
+        "lex64SortOrderString": {
+            "type": "string",
+            "pattern": "^[-_0-9a-zA-Z]*[_0-9a-zA-Z]$",
+            "minLength": 1,
+            "maxLength": 1024
+        },
+        "albumPayload": {
+            "type": "object",
+            "properties": {
+                "userCreated": {
+                    "$ref": "#/definitions/utcDateTime"
+                },
+                "userUpdated": {
+                    "$ref": "#/definitions/utcDateTime"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "cover": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "$ref": "#/definitions/uuid",
+                            "description": "Lightroom guid for the asset serving as the cover for the album."
+                        }
+                    }
+                },
+                "parent": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "$ref": "#/definitions/uuid",
+                            "description": "Lightroom guid for the direct parent of the new album."
+                        }
+                    }
+                },
+                "publishInfo": {
+                    "type": "object",
+                    "properties": {
+                        "servicePayload": {
+                            "type": "string",
+                            "description": "Album metadata, unique to the service, encapsulated as a single string with a maximum length of 1024 characters."
+                        },
+                        "remoteId": {
+                            "type": "string",
+                            "description": "Identifier for the album that is unique to the publishing service."
+                        },
+                        "created": {
+                            "$ref": "#/definitions/utcDateTime",
+                            "description": "Date when the externally affiliated content (identified by remoteId) was created."
+                        },
+                        "updated": {
+                            "$ref": "#/definitions/utcDateTime",
+                            "description": "Date when the externally affiliated content identified by remoteId) was last updated."
+                        },
+                        "deleted": {
+                            "type": "boolean",
+                            "description": "True if the externally affiliated content (identified by remoteId) was deleted; acts as a tombstone."
+                        },
+                        "remoteLinks": {
+                            "type": "object",
+                            "description": "Links to affiliated URLs on the publishing service.",
+                            "properties": {
+                                "edit": {
+                                    "type": "object",
+                                    "properties": {
+                                        "href": {
+                                            "type": "string",
+                                            "description": "Fully-formed URL to a location to edit affiliated content (identified by remoteId) on the external service."
+                                        }
+                                    }
+                                },
+                                "view": {
+                                    "properties": {
+                                        "href": {
+                                            "type": "string",
+                                            "description": "Fully-formed URL to a location to view affiliated content (identified by remoteId) on the external service."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Lightroom",
+        "url": "https://www.adobe.com/products/photoshop-lightroom.html"
+    }
+}

@@ -1,15 +1,15 @@
 {
   "private": true,
-  "name": "dev-site-documentation-template",
+  "name": "lightroom-public-api",
   "version": "1.0.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AdobeDocs/dev-site-documentation-template"
+    "url": "https://github.com/bagra98/lightroom-public-apis"
   },
   "author": {
-    "name": "Stephan Ringel",
-    "url": "https://github.com/icaraps"
+    "name": "Samyak Bagra",
+    "url": "https://github.com/bagra98"
   },
   "dependencies": {
     "@adobe/gatsby-theme-aio": "^3.20.1",

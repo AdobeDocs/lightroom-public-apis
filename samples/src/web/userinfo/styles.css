@@ -1,0 +1,40 @@
+/*
+Copyright 2020 Adobe
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file in
+accordance with the terms of the Adobe license agreement accompanying
+it. If you have received this file from a source other than Adobe,
+then your use, modification, or distribution of it requires the prior
+written permission of Adobe. 
+*/
+body {
+	background-color: var(--spectrum-global-color-gray-100);
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	color: var(--spectrum-global-color-gray-700);
+	font-size: 14px;
+	font-family: var(--spectrum-font-family-base);
+	font-weight: 100;
+	line-height: 20px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.header {
+	color: var(--spectrum-global-color-gray-200);
+	background-color: var(--spectrum-global-color-gray-700);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 84px;
+	padding: 10px;
+	box-sizing: border-box;
+	border-width: 2px;
+	border-color: var(--spectrum-global-color-gray-50);
+	border-top-style: solid;
+	border-bottom-style: solid;
+}

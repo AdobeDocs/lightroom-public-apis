@@ -1,0 +1,89 @@
+/*
+Copyright 2020 Adobe
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file in
+accordance with the terms of the Adobe license agreement accompanying
+it. If you have received this file from a source other than Adobe,
+then your use, modification, or distribution of it requires the prior
+written permission of Adobe. 
+*/
+body {
+	background-color: var(--spectrum-global-color-gray-100);
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	font-size: 14px;
+	font-family: var(--spectrum-font-family-base);
+	font-weight: 100;
+	line-height: 20px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.header {
+	color: var(--spectrum-global-color-gray-200);
+	background-color: var(--spectrum-global-color-gray-700);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 84px;
+	padding: 10px;
+	box-sizing: border-box;
+	border-width: 2px;
+	border-color: var(--spectrum-global-color-gray-50);
+	border-top-style: solid;
+	border-bottom-style: solid;
+}
+
+.lhp {
+	display: block;
+	position: absolute;
+	top: 84px;
+	bottom: 0;
+	left: 0;
+	width: 210px;
+	padding: 10px;
+	background-color: var(--spectrum-global-color-gray-200);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.lhp::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+.lhp::-webkit-scrollbar-thumb {
+	background-color: var(--spectrum-global-color-gray-500);
+	border-radius: 8px;
+	width: 8px;
+	height: 8px;
+	border-top: 2px solid rgba(0, 0, 0, 0);
+	border-bottom: 2px solid rgba(0, 0, 0, 0);
+	background-clip: padding-box;
+}
+
+.lhp::-webkit-scrollbar-track, .lhp::-webkit-scrollbar-track-piece {
+	background: var(--spectrum-global-color-gray-200);
+}
+
+.well {
+	position: absolute;
+	top: 84px;
+	right: 0;
+	bottom: 0;
+	left: 230px;
+}
+
+.popover {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	overflow: auto;
+}

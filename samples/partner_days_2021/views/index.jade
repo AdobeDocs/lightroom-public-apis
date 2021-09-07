@@ -1,0 +1,30 @@
+doctype
+html
+
+  head
+    title Partner App Example
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    header
+      h1 Partner App Example
+    .button-group
+      button(onclick="location.href='/login'") Log In with Adobe
+      button(onclick="location.href='/account'") Get Account
+      button(onclick="location.href='/catalog'") Get Catalog
+      button(onclick="location.href='/albums'") Get All Albums
+    br
+    br
+    form(action='/create_asset',method='post', enctype="multipart/form-data")
+               input(id='fileUpload',type='file',name='file')
+               button(type="submit") Upload an Image
+    br
+    br
+    form(action='/fetch_rendition',method='post')
+                  //span.label Enter Rendition Type (640,1280,2048):
+                  input(id='rendition_type',type='input',name='rendition_type', value='Enter Rendition Type')
+                  button(type="submit") Fetch Image Asset Rendition
+    .canvas
+          p #{response}
+          p #{response_second}
+    if rendition
+      img.image(src='/' + "images/rendition.jpeg" )

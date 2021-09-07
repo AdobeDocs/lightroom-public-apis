@@ -1,0 +1,25 @@
+{
+  "name": "lr-partner-apis-samples-web",
+  "version": "1.0.0",
+  "description": "Web samples using the Lightroom Services APIs",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "browserslist": "last 2 chrome version, last 2 firefox version, last 2 safari version",
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.13.8"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "@spectrum-css/icon": "^3.0.0-beta.2",
+    "@spectrum-css/sidenav": "^3.0.0-beta.5",
+    "@spectrum-css/typography": "^3.0.0-beta.1",
+    "@spectrum-css/vars": "^3.0.0-beta.2",
+    "lit-element": "^2.4.0"
+  }
+}

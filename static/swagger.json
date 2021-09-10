@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "description": "Lightroom API Documentation, made available through [adobe.io](https://www.adobe.io). API Change Logs are available [here](https://bagra98.github.io/lightroom-public-apis/release-notes/).",
+        "description": "Lightroom API Documentation, made available through [adobe.io](https://www.adobe.io). API Change Logs are available [here](https://www.adobe.io/lightroom-public-apis/release-notes/).",
         "version": "1.0.0",
         "title": "Lightroom API Documentation",
         "license": {
@@ -16,27 +16,23 @@
     ],
     "tags": [
         {
-            "name": "health",
-            "description": "Lightroom Services status.",
-            "externalDocs": {
-                "description": "More info",
-                "url": "https://www.adobe.io"
-            }
+            "name": "Health",
+            "description": "Lightroom Services status."
         },
         {
-            "name": "accounts",
+            "name": "Accounts",
             "description": "Account information for the authenticated user."
         },
         {
-            "name": "catalogs",
+            "name": "Catalogs",
             "description": "Catalog information for the authenticated user."
         },
         {
-            "name": "assets",
+            "name": "Assets",
             "description": "Information for assets, typically images or videos."
         },
         {
-            "name": "albums",
+            "name": "Albums",
             "description": "Information for albums, which contain references to zero or more assets."
         }
     ],

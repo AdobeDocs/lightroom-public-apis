@@ -40,7 +40,7 @@
         "/v2/health": {
           "get": {
             "tags": [
-              "health"
+              "Health"
             ],
             "summary": "Lightroom Services health check",
             "description": "Will return the Lightroom server version ID (a hexadecimal value not guaranteed to be sequential) if the services are up.",
@@ -85,7 +85,7 @@
         "/v2/account": {
           "get": {
             "tags": [
-              "accounts"
+              "Accounts"
             ],
             "summary": "Retrieve the user account metadata",
             "description": "An account is associated with each Adobe customer and contains the personal information and subscription status. This information can be obtained through the authentication APIs and is provided by Lightroom as a convenience.",
@@ -270,7 +270,7 @@
         "/v2/catalog": {
           "get": {
             "tags": [
-              "catalogs"
+              "Catalogs"
             ],
             "summary": "Retrieve the user catalog metadata",
             "description": "A catalog is the topmost container of resources for a user. Each catalog contains zero or more assets, albums, or other resources.",
@@ -546,7 +546,7 @@
         "/v2/catalogs/{catalog_id}/assets/{asset_id}" : {
           "put": {
             "tags": [
-              "assets"
+              "Assets"
             ],
             "summary": "Create asset",
             "description": "Create a new asset with initial metadata and import information.",
@@ -686,7 +686,7 @@
           },
           "get": {
             "tags": [
-              "assets"
+              "Assets"
             ],
             "summary": "Get a catalog asset",
             "description": "Retrieves information about a single asset in a catalog that the caller owns. Successful response may also return invalid flag in the rendition link for the asset. A rendition becomes invalid when an asset is edited after rendition has been generated. New renditions (only 2560 and fullsize) can be generated via Generate Renditions API. The read xmp/develop link in the response will have the invalid flag as true if asset with SHA256 has been created but external xmp/develop has not been uploaded yet.",
@@ -955,7 +955,7 @@
         "/v2/catalogs/{catalog_id}/assets" : {
           "get": {
             "tags": [
-              "assets"
+              "Assets"
             ],
             "summary": "Retrieve assets",
             "description": "Retrieve a list of existing assets that caller owns. Successful response may also return invalid flag in the rendition link for the asset. A rendition becomes invalid when an asset is edited after rendition has been generated. New renditions (only 2560 and fullsize) can be generated via Generate Renditions API. The read xmp/develop link in the response will have the invalid flag as true if asset with SHA256 has been created but external xmp/develop has not been uploaded yet.",
@@ -1447,7 +1447,7 @@
         "/v2/catalogs/{catalog_id}/assets/{asset_id}/master": {
           "put": {
             "tags": [
-              "assets"
+              "Assets"
             ],
             "summary": "Create an asset original file",
             "description": "Create and upload an original file for the asset. Up to 200 MB may be uploaded per invocation, and larger files may be uploaded by calling this API multiple times with Content-Range headers for each part. When all parts are received the upload will be consolidated asynchronously. All partial uploads should include optional rendition type parameters to ensure the last part received has the necessary options for request post-processing.",
@@ -1532,7 +1532,7 @@
         "/v2/catalogs/{catalog_id}/assets/{asset_id}/renditions": {
           "post": {
             "tags": [
-              "assets"
+              "Assets"
             ],
             "summary": "Generate renditions for an original file",
             "description": "Generate renditions for an original file asynchronously. Allowed rendition types are fullsize and 2560. Generated rendition will be deleted after 1 day automatically.",
@@ -1664,7 +1664,7 @@
         "/v2/catalogs/{catalog_id}/assets{asset_id}/renditions/{rendition_type}": {
           "get": {
             "tags": [
-              "assets"
+              "Assets"
             ],
             "summary": "Get latest asset rendition",
             "description": "Get latest asset rendition of specified type. It returns 404 if rendition does not exist. It returns 404 in another case when rendition is invalid (only for rendition type 2560 and fullsize)",
@@ -1757,7 +1757,7 @@
         "/v2/catalogs/{catalog_id}/assets/{asset_id}/xmp/develop": {
           "put": {
             "tags": [
-              "assets"
+              "Assets"
             ],
             "summary": "Create asset external xmp develop setting file",
             "description": "This API support two workflows. The first workflow is to upload external XMP develop settings file for the asset. Content-type header for this case is application/rdf+xml. The second workflow is to create an external XMP develop settings file by copying from another asset's external xmp develop setting file. Content-type header for this case is application/json.",
@@ -1870,7 +1870,7 @@
           },
           "get": {
             "tags": [
-              "assets"
+              "Assets"
             ],
             "summary": "Get latest asset external xmp develop setting",
             "description": "Get latest asset external xmp develop setting file",
@@ -1938,7 +1938,7 @@
         "/v2/catalogs/{catalog_id}/albums/{album_id}": {
           "put": {
             "tags": [
-              "albums"
+              "Albums"
             ],
             "summary": "Create album",
             "description": "Create a new album.",
@@ -2029,7 +2029,7 @@
           },
           "get": {
             "tags":[
-              "albums"
+              "Albums"
             ],
             "summary":"Get album",
             "description":"Read a album.",
@@ -2175,7 +2175,7 @@
           },
           "post": {
             "tags": [
-              "albums"
+              "Albums"
             ],
             "summary": "Update album",
             "description": "Update an existing album. The existing album should be created via the same client app and of subtype project or project_set.",
@@ -2261,7 +2261,7 @@
           },
           "delete": {
             "tags": [
-              "albums"
+              "Albums"
             ],
             "summary": "Delete album",
             "description": "Delete an existing album. The existing album should be created via the same client app and of subtype project or project_set.",
@@ -2334,7 +2334,7 @@
         "/v2/catalogs/{catalog_id}/albums": {
           "get": {
             "tags": [
-              "albums"
+              "Albums"
             ],
             "summary": "Retrieve albums",
             "description": "Retrieve a list of existing albums.",
@@ -2464,7 +2464,7 @@
         "/v2/catalogs/{catalog_id}/albums/{album_id}/assets": {
           "put": {
             "tags": [
-              "albums"
+              "Albums"
             ],
             "summary": "Add assets to album",
             "description": "Add many assets to the album. Note that there is no default defined order/position for the asset in the album. A payload may be provided with cover, order, and any other data allowed in the data model. If the asset already exists in the album and the cover field is supplied, then no error is thrown but only the cover update is applied and other entries in the payload are completely ignored. In all other cases trying to add an asset to an album that is already in the album will return an error. Limited to 50 assets per API call. Returns http status 201 if at least one asset was added to the album. If all assets could not be added, http status 403 is returned. Individual error codes are returned for each asset in the response body.",
@@ -2639,7 +2639,7 @@
           },
           "get": {
             "tags":[
-              "albums"
+              "Albums"
             ],
             "summary":"List assets of an album",
             "description":"Lists assets in an album. The assets in an album are returned sorted on either order if order* parameters are used. The assets in an album are returned sorted on captured date if order* parameters are not used and captured* parameters are used. Please note that the created and updated dates for Album asset documents will be returned as \"0000-00-00T00:00:00\". Successful response may also return invalid flag in the rendition link for the asset. A rendition becomes invalid when an asset is edited after rendition has been generated. New renditions (only 2560 and fullsize) can be generated via Generate Renditions API. The read xmp/develop link in the response will have the invalid flag as true if asset with SHA256 has been created but external xmp/develop has not been uploaded yet.",

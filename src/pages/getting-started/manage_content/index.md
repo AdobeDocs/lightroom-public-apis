@@ -17,7 +17,7 @@ A partner application can affiliate content in Lightroom with content in its own
 
 ## Uploading to Lightroom and Managing Content
 
-_Note: When a [new asset is created and uploaded](./upload.md) to a Lightroom catalog, partner applications should always set the `importedOnDevice` field to their API key. This will ensure that the asset is properly tagged in Lightroom as having originated from the partner application. They should also retain the unique identifier of the asset (`asset_id`) and catalog (`catalog_id`) for use in the workflows detailed below._
+_Note: When a [new asset is created and uploaded](../upload_content/) to a Lightroom catalog, partner applications should always set the `importedOnDevice` field to their API key. This will ensure that the asset is properly tagged in Lightroom as having originated from the partner application. They should also retain the unique identifier of the asset (`asset_id`) and catalog (`catalog_id`) for use in the workflows detailed below._
 
 Partner applications that upload new assets to the catalog of a Lightroom customer may want a way to identify those assets, both inside the Lightroom clients as well as in applications on their own services.
 
@@ -61,7 +61,7 @@ With a body of the form:
 }
 ```
 
-See the [generic data model page](../usage/generic.md) for descriptions of common fields. At the top level of the object is a `serviceId` that must be set to the API key of the partner application. The `payload.name` field holds a user-visible string that will be shown in Lightroom clients when they present the project album.
+See the [generic data model page](../guides/common_data_model/) for descriptions of common fields. At the top level of the object is a `serviceId` that must be set to the API key of the partner application. The `payload.name` field holds a user-visible string that will be shown in Lightroom clients when they present the project album.
 
 The `publishInfo` clause is the place for partner applications to persist information in the Lightroom catalog regarding external content that is affiliated with the project album. Its fields are:
 

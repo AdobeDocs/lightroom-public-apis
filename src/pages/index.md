@@ -30,7 +30,7 @@ The [Getting Started](getting-started/) page will walk you through how to use ou
 
 We encourage you to participate in our open documentation initiative, if you have suggestions, corrections, additions 
 or deletions for this documentation, check out the source from [this github repo](https://github.com/AdobeDocs/lightroom-public-apis), and submit a pull 
-request with your contribution. For more information, refer to the [contributing page](support/contribute/).
+request with your contribution.
 
 ## API Requests & Rate Limits
 

@@ -7,7 +7,7 @@ contributors:
 
 # Lightroom Services Health Check
 
-Registered partner applications can check the health of the Lightroom Services through the `/v2/health` API on the `https://lr.adobe.io` endpoint. The health check requires only the API key obtained by [Creating an Integration](/getting-started/create_integration).
+Registered partner applications can check the health of the Lightroom Services through the `/v2/health` API on the `https://lr.adobe.io` endpoint. The health check requires only the API key obtained by [Creating an Integration](../create_integration).
 
 Sample cURL might be:
 

@@ -17,7 +17,7 @@ Build applications that work with Lightroom
 
 #### Resources
 
-* [API Documentation](https://www.adobe.io/apis/creativecloud/lightroom/apidocs.html)
+* [API Documentation](api/)
 * [Adobe Lightroom Github Repo](https://github.com/AdobeDocs/lightroom-public-apis)
 
 ## Welcome to Lightroom API!
@@ -29,7 +29,7 @@ The [Getting Started](getting-started/) page will walk you through how to use ou
 ## Contributing 
 
 We encourage you to participate in our open documentation initiative, if you have suggestions, corrections, additions 
-or deletions for this documentation, check out the source from [this github repo](https://github.com/adobe/gatsby-theme-spectrum-example), and submit a pull 
+or deletions for this documentation, check out the source from [this github repo](https://github.com/AdobeDocs/lightroom-public-apis), and submit a pull 
 request with your contribution. For more information, refer to the [contributing page](support/contribute/).
 
 ## API Requests & Rate Limits

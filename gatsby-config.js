@@ -36,10 +36,6 @@ module.exports = {
       {
         title: 'Release Notes',
         path: '/release-notes/'
-      },
-      {
-        title: 'Support',
-        path: '/support/'
       }
     ],
     subPages: [

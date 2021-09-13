@@ -1,11 +1,11 @@
 ---
-title: Getting Started with Lightroom
+title: Start building with the Lightroom APIs
 description: Page for Getting Started
 contributors:
   - https://github.com/bagra98
 ---
 
-# Getting started with Lightroom API
+# Start building with the Lightroom APIs
 
 Adobe Photoshop Lightroom stores user _assets_, with their associated metadata and media renditions, in a _catalog_ in the cloud.
 

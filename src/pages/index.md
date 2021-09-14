@@ -31,10 +31,3 @@ The [Getting Started](getting-started/) page will walk you through how to use ou
 We encourage you to participate in our open documentation initiative, if you have suggestions, corrections, additions 
 or deletions for this documentation, check out the source from [this github repo](https://github.com/AdobeDocs/lightroom-public-apis), and submit a pull 
 request with your contribution.
-
-## API Requests & Rate Limits
-
-The timeout for API requests through adobe.io is currently *60 seconds*.
-
-The default rate limit for an Adobe Lightroom Company is *120 requests per minute*. (The limit is enforced as *12 requests every 6 seconds*).
-When rate limiting is being enforced you will get `429` HTTP response codes with the following response body: `{"error_code":"429050","message":"Too many requests"}`    

@@ -7,8 +7,6 @@ contributors:
 
 <Hero slots="image, heading, text" background="rgb(64, 34, 138)"/>
 
-![Hero image](./hero.png)
-
 # Adobe Lightroom API
 
 Build applications that work with Lightroom

@@ -584,7 +584,7 @@
                 "type": "string"
               },
               {
-                "in": "body",
+                "in": "path",
                 "name": "body",
                 "description": "Initial asset metadata and import information.",
                 "required": true,

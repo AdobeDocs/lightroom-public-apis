@@ -45,16 +45,15 @@
             "summary": "Lightroom Services health check",
             "description": "Will return the Lightroom server version ID (a hexadecimal value not guaranteed to be sequential) if the services are up.",
             "operationId": "getHealth",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+                "schema": {
+                  "type": "string"
+                }
               }
             ],
             "responses": {
@@ -90,23 +89,24 @@
             "summary": "Retrieve the user account metadata",
             "description": "An account is associated with each Adobe customer and contains the personal information and subscription status. This information can be obtained through the authentication APIs and is provided by Lightroom as a convenience.",
             "operationId": "getAccount",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses": {
@@ -122,13 +122,13 @@
                                 "description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
                               },
                               "id": {
-                                "$ref": "#/definitions/uuid"
+                                "$ref": "#/components/schemas/uuid"
                               },
                               "created": {
-                                "$ref": "#/definitions/utcDateTime"
+                                "$ref": "#/components/schemas/utcDateTime"
                               },
                               "updated": {
-                                "$ref": "#/definitions/utcDateTime"
+                                "$ref": "#/components/schemas/utcDateTime"
                               },
                               "type": {
                                 "type": "string",
@@ -275,23 +275,24 @@
             "summary": "Retrieve the user catalog metadata",
             "description": "A catalog is the topmost container of resources for a user. Each catalog contains zero or more assets, albums, or other resources.",
             "operationId": "getCatalog",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
-              },
+				"schema": {
+				  "type": "string"
+				}
+			  },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses": {
@@ -307,13 +308,13 @@
                                 "description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
                               },
                               "id": {
-                                "$ref": "#/definitions/uuid"
+                                "$ref": "#/components/schemas/uuid"
                               },
                               "created": {
-                                "$ref": "#/definitions/utcDateTime"
+                                "$ref": "#/components/schemas/utcDateTime"
                               },
                               "updated": {
-                                "$ref": "#/definitions/utcDateTime"
+                                "$ref": "#/components/schemas/utcDateTime"
                               },
                               "type": {
                                 "type": "string",
@@ -324,19 +325,17 @@
                                 "enum": [ "lightroom" ]
                               },
                               "payload": {
-                                "$schema": "http://json-schema.org/draft-04/schema#",
                                 "title": "Catalog Payload Schema",
                                 "type": "object",
-                                "definitions": {},
                                 "properties": {
                                   "userCreated": {
-                                    "$ref": "#/definitions/utcDateTime"
+                                    "$ref": "#/components/schemas/utcDateTime"
                                   },
                                   "userUpdated": {
-                                    "$ref": "#/definitions/utcDateTime"
+                                    "$ref": "#/components/schemas/utcDateTime"
                                   },
                                   "name": {
-                                    "$ref": "#/definitions/max1024CharacterString"
+                                    "$ref": "#/components/schemas/max1024CharacterString"
                                   },
                                   "assetSortOrder": {
                                     "type": "string",
@@ -358,11 +357,6 @@
                                     "properties": {
                                       "favorites": {
                                         "type": "object",
-                                        "patternProperties": {
-                                          "^.{1,128}$": {
-                                            "type": "boolean"
-                                          }
-                                        },
                                         "additionalProperties": false,
                                         "minProperties": 1
                                       }
@@ -375,11 +369,6 @@
                                     "properties": {
                                       "favorites": {
                                         "type": "object",
-                                        "patternProperties": {
-                                          "^.{1,128}$": {
-                                            "type": "boolean"
-                                          }
-                                        },
                                         "additionalProperties": false,
                                         "minProperties": 1
                                       }
@@ -395,20 +384,6 @@
                                         "properties": {
                                           "connections": {
                                             "type": "object",
-                                            "patternProperties": {
-                                              "^.{1,128}$": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "created": {
-                                                    "$ref": "#/definitions/utcDateTime"
-                                                  }
-                                                },
-                                                "additionalProperties": false,
-                                                "required": [
-                                                  "created"
-                                                ]
-                                              }
-                                            },
                                             "additionalProperties": false,
                                             "minProperties": 1
                                           }
@@ -551,94 +526,102 @@
             "summary": "Create asset",
             "description": "Create a new asset with initial metadata and import information.",
             "operationId": "createAsset",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
-              },
+				"schema": {
+				  "type": "string"
+				}
+			  },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog in which the asset will be created.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "asset_id",
                 "in": "path",
                 "description": "Client-generated Lightroom unique identifier for the new asset.",
                 "required": true,
-                "type": "string"
-              },
-              {
-                "in": "body",
-                "name": "body",
-                "description": "Initial asset metadata and import information.",
-                "required": true,
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "subtype": {
-                      "type": "string",
-                      "enum": [ "image", "video" ]
-                    },
-                    "payload": {
-                      "type": "object",
-                      "properties": {
-                        "userCreated": {
-                          "$ref": "#/definitions/iso8601DateTime"
-                        },
-                        "userUpdated": {
-                          "$ref": "#/definitions/iso8601DateTime"
-                        },
-                        "captureDate": {
-                          "type": "string",
-                          "enum": [ "0000-00-00T00:00:00", "#/definitions/iso8601DateTime" ],
-                          "required": true,
-                          "description": "Capture date of the asset in ISO-8601 format. Will be populated by the server automatically from the master if set to '0000-00-00T00:00:00'"
-                        },
-                        "importSource": {
-                          "type": "object",
-                          "properties": {
-                            "fileName": {
-                              "type": "string",
-                              "required": true
-                            },
-                            "importedOnDevice": {
-                              "type": "string",
-                              "required": true,
-                              "description": "Name of the device that imported the image."
-                            },
-                            "importedBy": {
-                              "type": "string",
-                              "required": true,
-                              "description": "Account ID of the user who imported the asset."
-                            },
-                            "importTimestamp": {
-                              "$ref": "#/definitions/iso8601DateTime",
-                              "required": true
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
+			"requestBody": {
+                "description": "Initial asset metadata and import information.",
+                "required": true,
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"type": "object",
+					"required" : [
+					  "captureDate"
+					],
+					"properties": {
+					  "subtype": {
+						"type": "string",
+						"enum": [ "image", "video" ]
+					  },
+					  "payload": {
+						"type": "object",
+						"properties": {
+						  "userCreated": {
+							"$ref": "#/components/schemas/iso8601DateTime"
+						  },
+						  "userUpdated": {
+							"$ref": "#/components/schemas/iso8601DateTime"
+						  },
+						  "captureDate": {
+							"type": "string",
+							"enum": [ "0000-00-00T00:00:00", "#/components/schemas/iso8601DateTime" ],
+							"description": "Capture date of the asset in ISO-8601 format. Will be populated by the server automatically from the master if set to '0000-00-00T00:00:00'"
+						  },
+						  "importSource": {
+							"type": "object",
+							"required" : [
+							  "fileName", "importedOnDevice", "importedBy", "importTimestamp"
+							],
+							"properties": {
+							  "fileName": {
+								"type": "string"
+							  },
+							  "importedOnDevice": {
+								"type": "string",
+								"description": "Name of the device that imported the image."
+							  },
+							  "importedBy": {
+								"type": "string",
+								"description": "Account ID of the user who imported the asset."
+							  },
+							  "importTimestamp": {
+								"$ref": "#/components/schemas/iso8601DateTime"
+							  }
+							}
+						  }
+						}
+					  }
+					}
+				  }
+				}
+			  }
+              },
             "responses": {
               "201": {
                 "description": "Created"
@@ -691,37 +674,42 @@
             "summary": "Get a catalog asset",
             "description": "Retrieves information about a single asset in a catalog that the caller owns. Successful response may also return invalid flag in the rendition link for the asset. A rendition becomes invalid when an asset is edited after rendition has been generated. New renditions (only 2560 and fullsize) can be generated via Generate Renditions API. The read xmp/develop link in the response will have the invalid flag as true if asset with SHA256 has been created but external xmp/develop has not been uploaded yet.",
             "operationId": "getAsset",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
-              },
+				"schema": {
+				  "type": "string"
+				}
+			  },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "asset_id",
                 "in": "path",
                 "description": "Identifier of the asset",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses": {
@@ -736,7 +724,7 @@
                                 "description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
                               },
                               "id": {
-                                "$ref": "#/definitions/uuid"
+                                "$ref": "#/components/schemas/uuid"
                               },
                               "type": {
                                 "type": "string",
@@ -746,10 +734,10 @@
                                 "type": "string"
                               },
                               "created": {
-                                "$ref": "#/definitions/utcDateTime"
+                                "$ref": "#/components/schemas/utcDateTime"
                               },
                               "updated": {
-                                "$ref": "#/definitions/utcDateTime"
+                                "$ref": "#/components/schemas/utcDateTime"
                               },
                               "links": {
                                 "type": "object"
@@ -811,7 +799,7 @@
                                 "description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
                               },
                               "id": {
-                                "$ref": "#/definitions/uuid"
+                                "$ref": "#/components/schemas/uuid"
                               },
                               "type": {
                                 "type": "string",
@@ -821,10 +809,10 @@
                                 "type": "string"
                               },
                               "created": {
-                                "$ref": "#/definitions/utcDateTime"
+                                "$ref": "#/components/schemas/utcDateTime"
                               },
                               "updated": {
-                                "$ref": "#/definitions/utcDateTime"
+                                "$ref": "#/components/schemas/utcDateTime"
                               },
                               "links": {
                                 "type": "object"
@@ -836,7 +824,7 @@
                                 "type": "object",
                                 "properties" : {
                                   "account_id": {
-                                    "$ref": "#/definitions/utcDateTime"
+                                    "$ref": "#/components/schemas/utcDateTime"
                                   }
                                 }
               
@@ -960,102 +948,129 @@
             "summary": "Retrieve assets",
             "description": "Retrieve a list of existing assets that caller owns. Successful response may also return invalid flag in the rendition link for the asset. A rendition becomes invalid when an asset is edited after rendition has been generated. New renditions (only 2560 and fullsize) can be generated via Generate Renditions API. The read xmp/develop link in the response will have the invalid flag as true if asset with SHA256 has been created but external xmp/develop has not been uploaded yet.",
             "operationId": "getAssets",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
-              },
+				"schema": {
+				  "type": "string"
+				}
+			  },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
-              },
+				"schema": {
+				  "type": "string"
+				}
+			  },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog containing the album.",
                 "required": true,
-                "type": "string"
-              },
+				"schema": {
+				  "type": "string"
+				}
+			  },
               {
                 "name": "updated_since",
                 "in": "query",
                 "description": "Starting timestamp",
-                "type": "dateTime"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "captured_before",
                 "in": "query",
                 "description": "Used to request assets captured before a given time. captured_before will be found in the \"links.next.href\" link. If no links.next is included in a listing response, this is a hint from the server that there are no assets in the catalog with a date captured_before the last asset in the list (the client has reached the \"bottom\" of the list). captured_before may not be used in conjunction with captured_after.",
-                "type": "dateTime"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "captured_after",
                 "in": "query",
                 "description": "Used to request assets captured after a given time. captured_after will be found in the \"links.prev.href\" link. If no links.prev is included in a listing response, this is a hint from the server that there are no assets in the catalog with a date captured_after the first asset in the list (the client has reached the \"top\" of the list). Note: assets imported without a captureDate payload property default to the value \"0000-00-00T00:00:00\". To list these assets set captured_after to \"-0001-12-31T23:59:59\". captured_after may not be used in conjunction with captured_before.",
-                "type": "dateTime"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "limit",
                 "in": "query",
                 "description": "Number of assets to return. Default value is 100. Maximum is 500. Please note that the response may contain more than 'limit' number of assets returned if the assets at the 'limit' boundary has the same capture_date. For example if there are 5 assets in a catalog and the 3rd, 4th and 5th assets all have the same capture dates the response will contain all 5 assets whether 'limit' is 3, 4 or 5.",
-                "type": "integer"
+				"schema": {
+				  "type": "integer"
+				}
               },
               {
                 "name": "sha256",
                 "in": "query",
                 "description": "SHA256 hash value of original file. Assets with a matching SHA256 hash will be returned. May be used in conjunction with subtype.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "hide_stacked_assets",
                 "in": "query",
                 "description": "To show or hide assets inside stacks in the catalog. If hide_stacked_assets is passed as true, assets inside stacks won't be returned. Default value is false.",
-                "type": "boolean"
+				"schema": {
+				  "type": "boolean"
+				}
               },
               {
                 "name": "subtype",
                 "in": "query",
                 "description": "Semi-colon separated asset subtype values.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "asset_ids",
                 "in": "query",
                 "description": "Set of 1 - 100 comma separated asset_id values. Other parameters can not be used in conjunction with this parameter.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "exclude",
                 "in": "query",
                 "description": "Used to request the list for different types of assets excluding incomplete or complete image and video assets. The valid values are \"incomplete\" and \"complete\". An image or video asset is considered to be complete if its proxy or original upload exists. An asset of subtypes profile, preset, camera_profile or lens_profile is considered complete if its original upload exists.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "group",
                 "in": "query",
                 "description": "Semi-colon separated group values. Subtype parameter of \"preset\" or \"profile\" is required when using this parameter.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "name",
                 "in": "query",
                 "description": "Semi-colon separated name values. Subtype parameter of \"preset\" or \"profile\" is required when using this parameter.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "favorite",
                 "in": "query",
                 "description": "Favorite status, subtype parameter of \"preset\" is required when using this parameter.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses": {
@@ -1074,7 +1089,7 @@
                                   "type": "object",
                                   "properties": {
                                     "id": {
-                                      "$ref": "#/definitions/uuid"
+                                      "$ref": "#/components/schemas/uuid"
                                     },
                                     "type": {
                                       "type": "string",
@@ -1084,10 +1099,10 @@
                                       "type": "string"
                                     },
                                     "created": {
-                                      "$ref": "#/definitions/utcDateTime"
+                                      "$ref": "#/components/schemas/utcDateTime"
                                     },
                                     "updated": {
-                                      "$ref": "#/definitions/utcDateTime"
+                                      "$ref": "#/components/schemas/utcDateTime"
                                     },
                                     "links": {
                                       "type": "object"
@@ -1233,7 +1248,7 @@
                                   "type": "object",
                                   "properties": {
                                     "id": {
-                                      "$ref": "#/definitions/uuid"
+                                      "$ref": "#/components/schemas/uuid"
                                     },
                                     "type": {
                                       "type": "string",
@@ -1243,10 +1258,10 @@
                                       "type": "string"
                                     },
                                     "created": {
-                                      "$ref": "#/definitions/utcDateTime"
+                                      "$ref": "#/components/schemas/utcDateTime"
                                     },
                                     "updated": {
-                                      "$ref": "#/definitions/utcDateTime"
+                                      "$ref": "#/components/schemas/utcDateTime"
                                     },
                                     "links": {
                                       "type": "object"
@@ -1263,7 +1278,7 @@
                                   "type": "object",
                                   "properties": {
                                     "id": {
-                                      "$ref": "#/definitions/uuid"
+                                      "$ref": "#/components/schemas/uuid"
                                     },
                                     "code": {
                                       "type": "integer"
@@ -1452,56 +1467,67 @@
             "summary": "Create an asset original file",
             "description": "Create and upload an original file for the asset. Up to 200 MB may be uploaded per invocation, and larger files may be uploaded by calling this API multiple times with Content-Range headers for each part. When all parts are received the upload will be consolidated asynchronously. All partial uploads should include optional rendition type parameters to ensure the last part received has the necessary options for request post-processing.",
             "operationId": "createAssetOriginal",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Content-Length",
                 "in": "header",
                 "description": "Length in bytes of the content.",
-                "type": "integer"
+				"schema": {
+				  "type": "integer"
+				}
               },
               {
                 "name": "Content-Range",
                 "in": "header",
                 "description": "Byte range for the request, including first and last bytes and entity length as defined in RFC 2616. Should be included only when the data cannot be uploaded in a single call.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Content-Type",
                 "in": "header",
                 "description": "Content type. For jpeg assets, the only allowed type is 'image/jpeg'. For camera raw assets the type is 'application/octet-stream'.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog in which the asset will be created.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "asset_id",
                 "in": "path",
                 "description": "Identifier of the asset to which the XMP settings are associated.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses": {
@@ -1537,50 +1563,59 @@
             "summary": "Generate renditions for an original file",
             "description": "Generate renditions for an original file asynchronously. Allowed rendition types are fullsize and 2560. Generated rendition will be deleted after 1 day automatically.",
             "operationId": "generateRenditions",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "X-Generate-Renditions",
                 "in": "header",
                 "description": "One or multiple of the supported rendition types separated by ','. Supported rendition types are : ['fullsize', '2560'].",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Content-Length",
                 "in": "header",
                 "description": "Length in bytes of the content.",
-                "type": "integer"
+				"schema": {
+				  "type": "integer"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog in which the asset was created.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "asset_id",
                 "in": "path",
                 "description": "Identifier of the asset for which rendition gets generated.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses": {
@@ -1669,44 +1704,51 @@
             "summary": "Get latest asset rendition",
             "description": "Get latest asset rendition of specified type. It returns 404 if rendition does not exist. It returns 404 in another case when rendition is invalid (only for rendition type 2560 and fullsize)",
             "operationId": "getAssetRendition",
-            "produces": [
-              "image/jpeg"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog in which asset exists.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "asset_id",
                 "in": "path",
                 "description": "Identifier of the asset for which to fetch rendition.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "rendition_type",
                 "in": "path",
                 "description": "One of the supported rendition types. Supported rendition types are : ['thumbnail2x', 'fullsize', '640', '1280', '2048', '2560'].",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses": {
@@ -1762,71 +1804,83 @@
             "summary": "Create asset external xmp develop setting file",
             "description": "This API support two workflows. The first workflow is to upload external XMP develop settings file for the asset. Content-type header for this case is application/rdf+xml. The second workflow is to create an external XMP develop settings file by copying from another asset's external xmp develop setting file. Content-type header for this case is application/json.",
             "operationId": "putAssetExternalXmpDevelopSetting",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog in which the asset will be created.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Content-Length",
-                "in": "path",
+                "in": "header",
                 "description": "Content length, in bytes. Current maximum size is 200 Mb.",
                 "required": true,
-                "type": "non Negative Integer"
+				"schema": {
+				  "type": "integer"
+				}
               },
               {
                 "name": "Content-Type",
-                "in": "path",
+                "in": "header",
                 "description": "For uploading a new xmp/develop file content-type='application/rdf+xml' and for copying xmp/develop file from another asset content-type='application/json'",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "asset_id",
                 "in": "path",
                 "description": "Client-generated Lightroom unique identifier for the new asset.",
                 "required": true,
-                "type": "string"
-              },
-              {
-                "in": "body",
-                "name": "body",
-                "description": "The below request body example is for copying external xmp/develop file from another asset. (For upload external xmp/develop  case the body will be a xml string. Eg. '\\<xml.../xml\\>')",
-                "required": true,
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "file_href": {
-                      "type": "string",
-                      "description": "External xmp/develop link of source asset."
-                    }
-                  },
-                  "example": {
-                    "file_href":"/v2/catalogs/{catalog_id}/assets/{source_asset_id}/xmp/develop"
-                  }
-                }
+				"schema": {
+				  "type": "string"
+				}
               }
-            ],
+			 ],
+			"requestBody": {
+			  "description": "The below request body example is for copying external xmp/develop file from another asset. (For upload external xmp/develop  case the body will be a xml string. Eg. '\\<xml.../xml\\>')",
+			  "required": true,
+			  "content": {
+				"application/json": {
+
+				  "schema": {
+					"type": "object",
+					"properties": {
+					  "file_href": {
+						"type": "string",
+						"description": "External xmp/develop link of source asset."
+					  }
+					},
+					"example": {
+					  "file_href":"/v2/catalogs/{catalog_id}/assets/{source_asset_id}/xmp/develop"
+					}
+				  }
+				}
+			  }
+			},
             "responses": {
               "201": {
                 "description": "Created"
@@ -1875,39 +1929,43 @@
             "summary": "Get latest asset external xmp develop setting",
             "description": "Get latest asset external xmp develop setting file",
             "operationId": "getAssetExternalXmpDevelopSetting",
-            "produces": [
-              "application/json",
-              "application/rdf+xml"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
-              },
+				"schema": {
+				  "type": "string"
+				}
+			  },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog in which asset exists.",
                 "required": true,
-                "type": "string"
-              },
+				"schema": {
+				  "type": "string"
+				}
+			  },
               {
                 "name": "asset_id",
                 "in": "path",
                 "description": "Identifier of the asset for which to fetch rendition.",
                 "required": true,
-                "type": "string"
-              }
+				"schema": {
+				  "type": "string"
+				}
+			  }
             ],
             "responses": {
               "200": {
@@ -1943,61 +2001,68 @@
             "summary": "Create album",
             "description": "Create a new album.",
             "operationId": "createAlbum",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog containing the album.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "album_id",
                 "in": "path",
                 "description": "Client-generated Lightroom unique identifier for the new album.",
                 "required": true,
-                "type": "string"
-              },
-              {
-                "in": "body",
-                "name": "body",
-                "description": "Initial album metadata and information.",
-                "required": true,
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "subtype": {
-                      "type": "string",
-                      "enum": [ "project", "project_set" ]
-                    },
-                    "serviceId": {
-                      "type": "string",
-                      "description": "The API Key (client identifier) of the service creating the album."
-                    },
-                    "payload": {
-                      "$ref": "#/definitions/albumPayload"
-                    }
-                  }
-                }
-              }
-            ],
+				"schema": {
+				  "type": "string"
+				}
+			  }
+			  ],
+			"requestBody": {
+			  "description": "Initial album metadata and information.",
+			  "required": true,
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"type": "object",
+					"properties": {
+					  "subtype": {
+						"type": "string",
+						"enum": [ "project", "project_set" ]
+					  },
+					  "serviceId": {
+						"type": "string",
+						"description": "The API Key (client identifier) of the service creating the album."
+					  },
+					  "payload": {
+						"$ref": "#/components/schemas/albumPayload"
+					  }
+					}
+				  }
+				}
+			  }
+  			},
             "responses": {
               "201": {
                 "description": "Created"
@@ -2034,37 +2099,42 @@
             "summary":"Get album",
             "description":"Read a album.",
             "operationId":"readAlbum",
-            "produces":[
-              "application/json"
-            ],
             "parameters":[
               {
                 "name":"X-API-Key",
                 "in":"header",
                 "description":"Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required":true,
-                "type":"string"
-              },
+				"schema": {
+				  "type": "string"
+				}
+			  },
               {
                 "name":"Authorization",
                 "in":"header",
                 "description":"Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required":true,
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"catalog_id",
                 "in":"path",
                 "description":"Identifier of the catalog containing the album.",
                 "required":true,
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"album_id",
                 "in":"path",
                 "description":"Client-generated Lightroom unique identifier for the new album.",
                 "required":true,
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses":{
@@ -2080,7 +2150,7 @@
                                 "description":"Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
                                 },
                                 "id":{
-                                "$ref":"#/definitions/uuid"
+                                "$ref":"#/components/schemas/uuid"
                                 },
                                 "type":{
                                 "type":"string",
@@ -2092,10 +2162,10 @@
                                 "type":"string"
                                 },
                                 "created":{
-                                "$ref":"#/definitions/utcDateTime"
+                                "$ref":"#/components/schemas/utcDateTime"
                                 },
                                 "updated":{
-                                "$ref":"#/definitions/utcDateTime"
+                                "$ref":"#/components/schemas/utcDateTime"
                                 },
                                 "links":{
                                 "type":"object"
@@ -2180,53 +2250,60 @@
             "summary": "Update album",
             "description": "Update an existing album. The existing album should be created via the same client app and of subtype project or project_set.",
             "operationId": "updateAlbum",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog containing the album.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "album_id",
                 "in": "path",
                 "description": "Identifier for the album.",
                 "required": true,
-                "type": "string"
-              },
-              {
-                "in": "body",
-                "name": "body",
-                "description": "Album metadata and information to be updated.",
-                "required": true,
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "payload": {
-                      "$ref": "#/definitions/albumPayload"
-                    }
-                  }
-                }
+				"schema": {
+				  "type": "string"
+				}
               }
-            ],
+			  ],
+  			"requestBody": {
+			  "description": "Album metadata and information to be updated.",
+			  "required": true,
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"type": "object",
+					"properties": {
+					  "payload": {
+						"$ref": "#/components/schemas/albumPayload"
+					  }
+					}
+				  }
+				}
+			  }
+			},
             "responses": {
               "204": {
                 "description": "No Content"
@@ -2266,43 +2343,50 @@
             "summary": "Delete album",
             "description": "Delete an existing album. The existing album should be created via the same client app and of subtype project or project_set.",
             "operationId": "deleteAlbum",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog containing the album.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "album_id",
                 "in": "path",
                 "description": "Identifier for the album.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "child_albums",
                 "in": "query",
                 "description": "This parameter when passed with a value, for example: true would delete all the child albums as well of the album specified. The deletion of child albums will be done asynchronously.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses": {
@@ -2339,48 +2423,57 @@
             "summary": "Retrieve albums",
             "description": "Retrieve a list of existing albums.",
             "operationId": "getAlbums",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog containing the album.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "subtype",
                 "in": "query",
                 "description": "Comma-separated list of subtypes to enumerate. Subtype can be one of 'project' or 'project_set'.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "name_after",
                 "in": "query",
                 "description": "UTF-8 string representing the name of the album that should precede the current page of results. In other words, the response will contain result with names greater than the 'name_after' value using standard string ordering relations.",
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "limit",
                 "in": "query",
                 "description": "Number of albums to return. Default value is 100. Please note that the response may contain more than 'limit' number of albums returned if multiple albums at the 'limit' boundary have the same name_after.",
-                "type": "integer"
+				"schema": {
+				  "type": "integer"
+				}
               }
             ],
             "responses": {
@@ -2401,13 +2494,13 @@
                                     "type": "object",
                                     "properties": {
                                     "id": {
-                                        "$ref": "#/definitions/uuid"
+                                        "$ref": "#/components/schemas/uuid"
                                     },
                                     "created": {
-                                        "$ref": "#/definitions/utcDateTime"
+                                        "$ref": "#/components/schemas/utcDateTime"
                                     },
                                     "updated": {
-                                        "$ref": "#/definitions/utcDateTime"
+                                        "$ref": "#/components/schemas/utcDateTime"
                                     },
                                     "type": {
                                         "type": "string",
@@ -2422,7 +2515,7 @@
                                         "description": "The API Key (client identifier) of the service affiliated with the album."
                                     },
                                     "payload": {
-                                        "$ref": "#/definitions/albumPayload"
+                                        "$ref": "#/components/schemas/albumPayload"
                                     },
                                     "links": {
                                         "type": "object"
@@ -2469,87 +2562,95 @@
             "summary": "Add assets to album",
             "description": "Add many assets to the album. Note that there is no default defined order/position for the asset in the album. A payload may be provided with cover, order, and any other data allowed in the data model. If the asset already exists in the album and the cover field is supplied, then no error is thrown but only the cover update is applied and other entries in the payload are completely ignored. In all other cases trying to add an asset to an album that is already in the album will return an error. Limited to 50 assets per API call. Returns http status 201 if at least one asset was added to the album. If all assets could not be added, http status 403 is returned. Individual error codes are returned for each asset in the response body.",
             "operationId": "addAssetsToAlbum",
-            "produces": [
-              "application/json"
-            ],
             "parameters": [
               {
                 "name": "X-API-Key",
                 "in": "header",
                 "description": "Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "Authorization",
                 "in": "header",
                 "description": "Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "catalog_id",
                 "in": "path",
                 "description": "Identifier of the catalog containing the album.",
                 "required": true,
-                "type": "string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name": "album_id",
                 "in": "path",
                 "description": "Identifier of the album.",
                 "required": true,
-                "type": "string"
-              },
-              {
-                "in": "body",
-                "name": "body",
+				"schema": {
+				  "type": "string"
+				}
+              }
+			],
+              "requestBody": {
                 "description": "Album asset metadata and information.",
                 "required": true,
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "resources": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "$ref": "#/definitions/uuid",
-                            "description": "UUID of the asset to be added to the album."
-                          },
-                          "payload": {
-                            "type": "object",
-                            "properties": {
-                              "cover": {
-                                "type": "boolean",
-                                "description": "Whether this asset should be used as the album cover."
-                              },
-                              "order": {
-                                "$ref": "#/definitions/lex64SortOrderString"
-                              },
-                              "publishInfo": {
-                                "type": "object",
-                                "properties": {
-                                  "servicePayload": {
-                                    "type": "string",
-                                    "description": "Album asset metadata, unique to the service, encapsulated as a single string with a maximum length of 1024 characters."
-                                  },
-                                  "remoteId": {
-                                    "type": "string",
-                                    "description": "Identifier for the album asset that is unique to the publishing service."
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            ],
+				"content": {
+				  "application/json": {
+					"schema": {
+					  "type": "object",
+					  "properties": {
+						"resources": {
+						  "type": "array",
+						  "items": {
+							"type": "object",
+							"properties": {
+							  "id": {
+								"$ref": "#/components/schemas/uuid",
+								"description": "UUID of the asset to be added to the album."
+							  },
+							  "payload": {
+								"type": "object",
+								"properties": {
+								  "cover": {
+									"type": "boolean",
+									"description": "Whether this asset should be used as the album cover."
+								  },
+								  "order": {
+									"$ref": "#/components/schemas/lex64SortOrderString"
+								  },
+								  "publishInfo": {
+									"type": "object",
+									"properties": {
+									  "servicePayload": {
+										"type": "string",
+										"description": "Album asset metadata, unique to the service, encapsulated as a single string with a maximum length of 1024 characters."
+									  },
+									  "remoteId": {
+										"type": "string",
+										"description": "Identifier for the album asset that is unique to the publishing service."
+									  }
+									}
+								  }
+								}
+							  }
+							}
+						  }
+						}
+					  }
+					}
+
+				  }
+				}
+              },
             "responses": {
               "201": {
                 "description": "Created",
@@ -2568,7 +2669,7 @@
                                     "type": "object",
                                     "properties": {
                                     "id": {
-                                        "$ref": "#/definitions/uuid"
+                                        "$ref": "#/components/schemas/uuid"
                                     },
                                     "href": {
                                         "type": "string"
@@ -2582,7 +2683,7 @@
                                         "type": "object",
                                         "properties": {
                                         "id": {
-                                            "$ref": "#/definitions/uuid"
+                                            "$ref": "#/components/schemas/uuid"
                                         },
                                         "http_status": {
                                             "type": "integer"
@@ -2644,109 +2745,138 @@
             "summary":"List assets of an album",
             "description":"Lists assets in an album. The assets in an album are returned sorted on either order if order* parameters are used. The assets in an album are returned sorted on captured date if order* parameters are not used and captured* parameters are used. Please note that the created and updated dates for Album asset documents will be returned as \"0000-00-00T00:00:00\". Successful response may also return invalid flag in the rendition link for the asset. A rendition becomes invalid when an asset is edited after rendition has been generated. New renditions (only 2560 and fullsize) can be generated via Generate Renditions API. The read xmp/develop link in the response will have the invalid flag as true if asset with SHA256 has been created but external xmp/develop has not been uploaded yet.",
             "operationId":"listAssetsOfAlbum",
-            "produces":[
-              "application/json"
-            ],
             "parameters":[
               {
                 "name":"X-API-Key",
                 "in":"header",
                 "description":"Client ID (API Key) which is subscribed to the Lightroom APIs through console.adobe.io",
                 "required":true,
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"Authorization",
                 "in":"header",
                 "description":"Bearer [token] - User access token of an authenticated Lightroom customer",
                 "required":true,
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"catalog_id",
                 "in":"path",
                 "description":"Identifier of the catalog containing the album.",
                 "required":true,
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"album_id",
                 "in":"path",
                 "description":"Identifier of the album.",
                 "required":true,
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"captured_before",
                 "in":"query",
                 "description":"Used to request assets captured before a given time. captured_before will be found in the \"links.next.href\" link. If no links.next is included in a listing response, this is a hint from the server that there are no assets in the catalog with a date captured_before the last asset in the list (the client has reached the \"bottom\" of the list). captured_before may not be used in conjunction with captured_after.",
-                "type":"dateTime"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"captured_after",
                 "in":"query",
                 "description":"Used to request assets captured after a given time. captured_after will be found in the \"links.prev.href\" link. If no links.prev is included in a listing response, this is a hint from the server that there are no assets in the catalog with a date captured_after the first asset in the list (the client has reached the \"top\" of the list). Note: assets imported without a captureDate payload property default to the value \"0000-00-00T00:00:00\". To list these assets set captured_after to \"-0001-12-31T23:59:59\". captured_after may not be used in conjunction with captured_before.",
-                "type":"dateTime"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"order_after",
                 "in":"query",
                 "description":"Used to request assets having order value greater than specified value. Next and previous pages will be found in the \"links.next.href\" and \"links.prev.href\" links respectively. If next/prev link is missing, it indicates that there is no next/prev page. Some rules about using order_after: 1) Specify \"-\" to get the first page. 2) Can be max of 1024 characters. 3) Should be a lex64 sort order string with characters in the set: [-0-9A-Z_a-z] with sort order in the same sequence as in the set [-0-9A-Z_a-z]. 4) captured_before cannot be used with order_after 5) captured_after can be used only if order_after==\"\"",
-                "type":"dateTime"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"order_before",
                 "in":"query",
                 "description":"Used to request assets having order value lesser than specified value. Next and previous pages will be found in the \"links.next.href\" and \"links.prev.href\" links respectively. If next/prev link is missing, it indicates that there is no next/prev page. Some rules about using order_before: 1) Specify order_before as \"\" and captured_before as a future date to get the first page. 2) Can be max of 1024 characters. 3) Should be a lex64 sort order string with characters in the set: [-0-9A-Z_a-z] with sort order in the same sequence as in the set [-0-9A-Z_a-z]. 4) captured_after cannot be used with order_before 5) captured_before can be used only if order_before==\"\"",
-                "type":"dateTime"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"limit",
                 "in":"query",
                 "description":"Number of assets to return. Default value is 100. Maximum is 500. Please note that the response may contain more than 'limit' number of assets returned if the assets at the 'limit' boundary has the same capture_date. For example if there are 5 assets in a catalog and the 3rd, 4th and 5th assets all have the same capture dates the response will contain all 5 assets whether 'limit' is 3, 4 or 5.",
-                "type":"integer"
+				"schema": {
+				  "type": "integer"
+				}
               },
               {
                 "name":"hide_stacked_assets",
                 "in":"query",
                 "description":"To show or hide assets inside stacks in the catalog. If hide_stacked_assets is passed as true, assets inside stacks won't be returned. Default value is false.",
-                "type":"boolean"
+				"schema": {
+				  "type": "boolean"
+				}
               },
               {
                 "name":"subtype",
                 "in":"query",
                 "description":"Semi-colon separated asset subtype values.",
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"flag",
                 "in":"query",
                 "description":"Semi-colon separated review flag values used to filter assets returned. Can be combined with subtype filter. Valid values for flags are 'pick', 'unflagged' and 'reject'. This parameter cannot be used along with album_filters parameter. Default behavior is to display all assets.",
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"embed",
                 "in":"query",
                 "description":"Semicolon-delimited list of additional data to include. When the list includes \"asset\", the asset subdocuments contains all the fields. Otherwise, only the id and self href link are returned in the asset subdocuments.",
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"exclude",
                 "in":"query",
                 "description":"Used to request the list for different types of assets excluding incomplete or complete image and video assets. The valid values are \"incomplete\" and \"complete\". An image or video asset is considered to be complete if its proxy or original upload exists. An asset of subtypes profile, preset, camera_profile or lens_profile is considered complete if its original upload exists.",
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"asset_ids",
                 "in":"query",
                 "description":"Set of 1 - 100 comma separated asset_id values. Other parameters can not be used in conjunction with this parameter.",
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               },
               {
                 "name":"album_filters",
                 "in":"query",
                 "description":"When album_filters is set to 'true', it filters out all the album assets based on the presentation filters set on the album. With this parameter, rejected assets always get filtered out irrespective of settings in presentation filters. Presentation filters are not applied when any value other than 'true' is set for album_filters. Default behavior is to display all assets. This parameter cannot be used along with flag parameter.\t\tno\nResponse: 200 OK",
-                "type":"string"
+				"schema": {
+				  "type": "string"
+				}
               }
             ],
             "responses":{
@@ -2766,7 +2896,7 @@
                                 "description": "Contains details of the album whose assets are being fetched",
                                 "properties": {
                                     "id": {
-                                    "$ref": "#/definitions/uuid"
+                                    "$ref": "#/components/schemas/uuid"
                                     },
                                     "links" : {
                                     "type": "object"
@@ -2779,17 +2909,17 @@
                                     "type" : "object",
                                     "properties": {
                                     "id": {
-                                        "$ref": "#/definitions/uuid"
+                                        "$ref": "#/components/schemas/uuid"
                                     },
                                     "type": {
                                         "type": "string",
                                         "enum": ["album_asset"]
                                     },
                                     "created": {
-                                        "$ref": "#/definitions/utcDateTime"
+                                        "$ref": "#/components/schemas/utcDateTime"
                                     },
                                     "updated": {
-                                        "$ref": "#/definitions/utcDateTime"
+                                        "$ref": "#/components/schemas/utcDateTime"
                                     },
                                     "links" : {
                                         "type": "object"
@@ -2798,7 +2928,7 @@
                                         "type" : "object",
                                         "properties": {
                                         "id": {
-                                            "$ref": "#/definitions/uuid"
+                                            "$ref": "#/components/schemas/uuid"
                                         },
                                         "links": {
                                             "type": "object"
@@ -3611,16 +3741,16 @@
                                         "type": "object",
                                         "properties": {
                                             "id": {
-                                                "$ref": "#/definitions/uuid"
+                                                "$ref": "#/components/schemas/uuid"
                                             },
                                             "created": {
-                                                "$ref": "#/definitions/utcDateTime"
+                                                "$ref": "#/components/schemas/utcDateTime"
                                             },
                                             "created_by": {
-                                                "$ref": "#/definitions/uuid"
+                                                "$ref": "#/components/schemas/uuid"
                                             },
                                             "updated": {
-                                                "$ref": "#/definitions/utcDateTime"
+                                                "$ref": "#/components/schemas/utcDateTime"
                                             },
                                             "links": {
                                                 "type": "object"
@@ -3755,119 +3885,112 @@
                     }
                 }
             }
-        }
-    },
-    "definitions": {
-        "iso8601DateTime": {
-            "description": "iso8601DateTime - datetime in ISO-8601 format (e.g. 2016-01-15T16:18:00-05:00) with both date and time required, including seconds, but timezone optional. Also flexible on allowing some nonstandard timezone formats like 2016-01-15T12:10:32+0000 or 2016-01-15T12:10:32-05.",
-            "type": "string",
-            "pattern": "^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3})-((02-([1-2][0-9]|0[1-9]))|((01|03|05|07|08|10|12)-(3[0-1]|[1-2][0-9]|0[1-9]))|((04|06|09|11)-(30|[1-2][0-9]|0[1-9])))T(2[0-3]|[0-1][0-9]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(((\\+|-)(2[0-3]|[0-1][0-9])(:?[0-5][0-9])?)|Z)?$"
         },
-        "utcDateTime": {
-            "description": "utcDateTime - datetime in RFC-3339 format (subset of ISO-8601) requiring a UTC time ending with Z (so -00:00 or +00-00 suffix NOT allowed). The datetime must have date and time, including seconds, e.g. 2016-01-15T09:23:34Z.",
-            "type": "string",
-            "pattern": "^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3})-((02-([1-2][0-9]|0[1-9]))|((01|03|05|07|08|10|12)-(3[0-1]|[1-2][0-9]|0[1-9]))|((04|06|09|11)-(30|[1-2][0-9]|0[1-9])))T(2[0-3]|[0-1][0-9]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?Z$"
-        },
-        "max1024CharacterString": {
-            "description": "max1024CharacterString",
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 1024
-        },
-        "uuid": {
-            "description": "uuid",
-            "type": "string",
-            "pattern": "^[a-f0-9]{32}$"
-        },
-        "lex64SortOrderString": {
-            "description": "lex64SortOrderString",
-            "type": "string",
-            "pattern": "^[-_0-9a-zA-Z]*[_0-9a-zA-Z]$",
-            "minLength": 1,
-            "maxLength": 1024
-        },
-        "albumPayload": {
-            "description": "albumPayload",
-            "type": "object",
-            "properties": {
-                "userCreated": {
-                    "$ref": "#/definitions/utcDateTime"
-                },
-                "userUpdated": {
-                    "$ref": "#/definitions/utcDateTime"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "cover": {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "$ref": "#/definitions/uuid",
-                            "description": "Lightroom guid for the asset serving as the cover for the album."
-                        }
-                    }
-                },
-                "parent": {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "$ref": "#/definitions/uuid",
-                            "description": "Lightroom guid for the direct parent of the new album."
-                        }
-                    }
-                },
-                "publishInfo": {
-                    "type": "object",
-                    "properties": {
-                        "servicePayload": {
-                            "type": "string",
-                            "description": "Album metadata, unique to the service, encapsulated as a single string with a maximum length of 1024 characters."
-                        },
-                        "remoteId": {
-                            "type": "string",
-                            "description": "Identifier for the album that is unique to the publishing service."
-                        },
-                        "created": {
-                            "$ref": "#/definitions/utcDateTime",
-                            "description": "Date when the externally affiliated content (identified by remoteId) was created."
-                        },
-                        "updated": {
-                            "$ref": "#/definitions/utcDateTime",
-                            "description": "Date when the externally affiliated content identified by remoteId) was last updated."
-                        },
-                        "deleted": {
-                            "type": "boolean",
-                            "description": "True if the externally affiliated content (identified by remoteId) was deleted; acts as a tombstone."
-                        },
-                        "remoteLinks": {
-                            "type": "object",
-                            "description": "Links to affiliated URLs on the publishing service.",
-                            "properties": {
-                                "edit": {
-                                    "type": "object",
-                                    "properties": {
-                                        "href": {
-                                            "type": "string",
-                                            "description": "Fully-formed URL to a location to edit affiliated content (identified by remoteId) on the external service."
-                                        }
-                                    }
-                                },
-                                "view": {
-                                    "properties": {
-                                        "href": {
-                                            "type": "string",
-                                            "description": "Fully-formed URL to a location to view affiliated content (identified by remoteId) on the external service."
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
+	  "schemas": {
+		"iso8601DateTime": {
+		  "pattern": "^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3})-((02-([1-2][0-9]|0[1-9]))|((01|03|05|07|08|10|12)-(3[0-1]|[1-2][0-9]|0[1-9]))|((04|06|09|11)-(30|[1-2][0-9]|0[1-9])))T(2[0-3]|[0-1][0-9]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(((\\+|-)(2[0-3]|[0-1][0-9])(:?[0-5][0-9])?)|Z)?$",
+		  "type": "string",
+		  "description": "datetime in ISO-8601 format (e.g. 2016-01-15T16:18:00-05:00) with both date and time required, including seconds, but timezone optional. Also flexible on allowing some nonstandard timezone formats like 2016-01-15T12:10:32+0000 or 2016-01-15T12:10:32-05."
+		},
+		"utcDateTime": {
+		  "pattern": "^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3})-((02-([1-2][0-9]|0[1-9]))|((01|03|05|07|08|10|12)-(3[0-1]|[1-2][0-9]|0[1-9]))|((04|06|09|11)-(30|[1-2][0-9]|0[1-9])))T(2[0-3]|[0-1][0-9]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?Z$",
+		  "type": "string",
+		  "description": "datetime in RFC-3339 format (subset of ISO-8601) requiring a UTC time ending with Z (so -00:00 or +00-00 suffix NOT allowed). The datetime must have date and time, including seconds, e.g. 2016-01-15T09:23:34Z."
+		},
+		"max1024CharacterString": {
+		  "maxLength": 1024,
+		  "minLength": 1,
+		  "type": "string"
+		},
+		"uuid": {
+		  "pattern": "^[a-f0-9]{32}$",
+		  "type": "string"
+		},
+		"lex64SortOrderString": {
+		  "maxLength": 1024,
+		  "minLength": 1,
+		  "pattern": "^[-_0-9a-zA-Z]*[_0-9a-zA-Z]$",
+		  "type": "string"
+		},
+		"albumPayload": {
+		  "type": "object",
+		  "properties": {
+			"userCreated": {
+			  "$ref": "#/components/schemas/utcDateTime"
+			},
+			"userUpdated": {
+			  "$ref": "#/components/schemas/utcDateTime"
+			},
+			"name": {
+			  "type": "string"
+			},
+			"cover": {
+			  "type": "object",
+			  "properties": {
+				"id": {
+				  "$ref": "#/components/schemas/uuid"
+				}
+			  }
+			},
+			"parent": {
+			  "type": "object",
+			  "properties": {
+				"id": {
+				  "$ref": "#/components/schemas/uuid"
+				}
+			  }
+			},
+			"publishInfo": {
+			  "type": "object",
+			  "properties": {
+				"servicePayload": {
+				  "type": "string",
+				  "description": "Album metadata, unique to the service, encapsulated as a single string with a maximum length of 1024 characters."
+				},
+				"remoteId": {
+				  "type": "string",
+				  "description": "Identifier for the album that is unique to the publishing service."
+				},
+				"created": {
+				  "$ref": "#/components/schemas/utcDateTime"
+				},
+				"updated": {
+				  "$ref": "#/components/schemas/utcDateTime"
+				},
+				"deleted": {
+				  "type": "boolean",
+				  "description": "True if the externally affiliated content (identified by remoteId) was deleted; acts as a tombstone."
+				},
+				"remoteLinks": {
+				  "type": "object",
+				  "properties": {
+					"edit": {
+					  "type": "object",
+					  "properties": {
+						"href": {
+						  "type": "string",
+						  "description": "Fully-formed URL to a location to edit affiliated content (identified by remoteId) on the external service."
+						}
+					  }
+					},
+					"view": {
+					  "type": "object",
+					  "properties": {
+						"href": {
+						  "type": "string",
+						  "description": "Fully-formed URL to a location to view affiliated content (identified by remoteId) on the external service."
+						}
+					  }
+					}
+				  },
+				  "description": "Links to affiliated URLs on the publishing service."
+				}
+			  }
+			}
+		  }
+		}
+	  }
+	},
     "externalDocs": {
         "description": "Find out more about Lightroom",
         "url": "https://www.adobe.com/products/photoshop-lightroom.html"

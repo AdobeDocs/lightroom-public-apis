@@ -590,7 +590,7 @@
 											},
 											"captureDate": {
 												"type": "string",
-												"enum": [ "0000-00-00T00:00:00", "#/components/schemas/iso8601DateTime" ],
+												"enum": [ "0000-00-00T00:00:00", "iso8601DateTime" ],
 												"description": "Capture date of the asset in ISO-8601 format. Will be populated by the server automatically from the master if set to '0000-00-00T00:00:00'"
 											},
 											"importSource": {
@@ -1753,7 +1753,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "Asset rendition file"
+						"description": "Asset rendition file. Response content type : image/jpeg"
 					},
 					"400": { "description": "The request failed due to an invalid something.",
 						"content": { "application/json": { "schema": { "anyOf": [{

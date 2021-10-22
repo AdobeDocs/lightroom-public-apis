@@ -981,7 +981,9 @@
 						"in": "query",
 						"description": "Starting timestamp",
 						"schema": {
-							"type": "string"
+							"dateTime": {
+								"type": "string"
+							}
 						}
 					},
 					{
@@ -989,7 +991,9 @@
 						"in": "query",
 						"description": "Used to request assets captured before a given time. captured_before will be found in the \"links.next.href\" link. If no links.next is included in a listing response, this is a hint from the server that there are no assets in the catalog with a date captured_before the last asset in the list (the client has reached the \"bottom\" of the list). captured_before may not be used in conjunction with captured_after.",
 						"schema": {
-							"type": "string"
+							"dateTime": {
+								"type": "string"
+							}
 						}
 					},
 					{
@@ -997,7 +1001,9 @@
 						"in": "query",
 						"description": "Used to request assets captured after a given time. captured_after will be found in the \"links.prev.href\" link. If no links.prev is included in a listing response, this is a hint from the server that there are no assets in the catalog with a date captured_after the first asset in the list (the client has reached the \"top\" of the list). Note: assets imported without a captureDate payload property default to the value \"0000-00-00T00:00:00\". To list these assets set captured_after to \"-0001-12-31T23:59:59\". captured_after may not be used in conjunction with captured_before.",
 						"schema": {
-							"type": "string"
+							"dateTime": {
+								"type": "string"
+							}
 						}
 					},
 					{

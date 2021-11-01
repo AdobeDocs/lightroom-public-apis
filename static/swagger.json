@@ -627,7 +627,7 @@
 						"description": "Created"
 					},
 					"400": {
-						"description": "The request failed due to an invalid something.",
+						"description": "The request failed due to an invalid input.",
 						"content": { "application/json": { "schema": { "anyOf": [{
 							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
 						},
@@ -899,7 +899,7 @@
 								}
 							]}}}
 					},
-					"400": { "description": "The request failed due to an invalid something.",
+					"400": { "description": "The request failed due to an invalid input.",
 						"content": { "application/json": { "schema": { "anyOf": [{
 							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
 						},
@@ -1418,7 +1418,7 @@
 						]}}
 						}
 					},
-					"400": { "description": "The request failed due to an invalid something.",
+					"400": { "description": "The request failed due to an invalid input.",
 						"content": { "application/json": { "schema": { "anyOf": [{
 							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
 						},
@@ -1646,7 +1646,7 @@
 							}
 						}
 					},
-					"400": { "description": "The request failed due to an invalid something.",
+					"400": { "description": "The request failed due to an invalid input.",
 						"content": { "application/json": { "schema": { "anyOf": [{
 							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
 						},
@@ -1755,7 +1755,7 @@
 					"200": {
 						"description": "Asset rendition file. Response content type : image/jpeg"
 					},
-					"400": { "description": "The request failed due to an invalid something.",
+					"400": { "description": "The request failed due to an invalid input.",
 						"content": { "application/json": { "schema": { "anyOf": [{
 							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
 						},
@@ -1885,7 +1885,7 @@
 					"201": {
 						"description": "Created"
 					},
-					"400": { "description": "The request failed due to an invalid something.",
+					"400": { "description": "The request failed due to an invalid input.",
 						"content": { "application/json": { "schema": { "anyOf": [{
 							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
 						},
@@ -2067,7 +2067,7 @@
 					"201": {
 						"description": "Created"
 					},
-					"400": { "description": "The request failed due to an invalid something.",
+					"400": { "description": "The request failed due to an invalid input.",
 						"content": { "application/json": { "schema": { "anyOf": [{
 							"$ref": "#/components/responses/BadRequestJSON/content/application~1json/schema"
 						},
@@ -2308,7 +2308,7 @@
 					"204": {
 						"description": "No Content"
 					},
-					"400": { "description": "The request failed due to an invalid something.",
+					"400": { "description": "The request failed due to an invalid input.",
 						"content": { "application/json": { "schema": { "anyOf": [{
 							"$ref": "#/components/responses/BadRequestJSON/content/application~1json/schema"
 						},

@@ -498,16 +498,18 @@
 					},
 					"403": {
 						"description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/ForbiddenAccount/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/Forbidden/content/application~1json/schema"
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CatalogAccessError"
+								},
+								"examples": {
+									"InvalidApiKey": {
+										"$ref": "#/components/examples/ForbiddenKeyExample"
+									}
+								}
 							}
-						]}}}
+						}
 					},
 					"404": {
 						"$ref": "#/components/responses/NotFound"
@@ -627,34 +629,61 @@
 						"description": "Created"
 					},
 					"400": {
-						"description": "The request failed due to an invalid input.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/BadRequestJSON/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestSubtype/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestPayload/content/application~1json/schema"
-							}]}}}
+						"description": "The request failed due to an invalid input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{"$ref": "#/components/schemas/BadRequestGUID"},
+										{"$ref": "#/components/schemas/BadRequestJSON"},
+										{"$ref": "#/components/schemas/BadRequestSubtype"},
+										{"$ref": "#/components/schemas/BadRequestPayload"}
+									]
+								},
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/BadRequestGUIDExample"
+									},
+									"BadRequestJSON": {
+										"$ref": "#/components/examples/BadRequestJSONExample"
+									},
+									"BadRequestSubtype": {
+										"$ref": "#/components/examples/BadRequestSubtypeExample"
+									},
+									"BadRequestPayload": {
+										"$ref": "#/components/examples/BadRequestPayloadExample"
+									}
+								}
+							}
+						}
 					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
 					"403": {
 						"description": "The request failed due to insufficient permissions",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/ForbiddenExists/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/ForbiddenQuota/content/application~1json/schema"
-							}]}}}
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{"$ref": "#/components/schemas/ForbiddenKeyError"},
+										{"$ref": "#/components/schemas/ResourceExistsError"},
+										{"$ref": "#/components/schemas/QuotaExceededError"}
+									]
+								},
+								"examples": {
+									"InvalidApiKey": {
+										"$ref": "#/components/examples/ForbiddenKeyExample"
+									},
+									"ResourceExists": {
+										"$ref": "#/components/examples/ResourceExistsErrorExample"
+									},
+									"QuotaExceeded": {
+										"$ref": "#/components/examples/AssetQuotaExceededErrorExample"
+									}
+								}
+							}
+						}
 					},
 					"404": {
 						"$ref": "#/components/responses/NotFound"
@@ -714,226 +743,95 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK",
+ 						"description": "OK",
+ 						"content": {
+ 							"application/json": {
+ 								"schema": {
+ 									"oneOf": [
+ 										{"$ref": "#/components/schemas/SuccessImageAsset"},
+ 										{"$ref": "#/components/schemas/SuccessVideoAsset"}
+ 									]
+ 								},
+ 								"examples": {
+ 									"SuccessImageAsset": {
+ 										"$ref": "#/components/examples/SuccessImageAssetExample"
+ 									},
+ 									"SuccessVideoAsset": {
+ 										"$ref": "#/components/examples/SuccessVideoAssetExample"
+ 									}
+ 								}
+ 							}
+ 						}
+ 					},
+					"400": {
+						"description": "The request failed due to an invalid input",
 						"content": {
-							"application/json": { "schema": { "anyOf": [{
-								"type": "object",
-								"properties": {
-									"base" : {
-										"type": "string",
-										"description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
-									},
-									"id": {
-										"$ref": "#/components/schemas/uuid"
-									},
-									"type": {
-										"type": "string",
-										"enum": ["asset"]
-									},
-									"subtype": {
-										"type": "string"
-									},
-									"created": {
-										"$ref": "#/components/schemas/utcDateTime"
-									},
-									"updated": {
-										"$ref": "#/components/schemas/utcDateTime"
-									},
-									"links": {
-										"type": "object"
-									},
-									"payload": {
-										"type": "object"
-									}
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{"$ref": "#/components/schemas/BadRequestGUID"},
+										{"$ref": "#/components/schemas/BadRequestAssetIds"},
+										{"$ref": "#/components/schemas/BadRequestGroup"},
+										{"$ref": "#/components/schemas/BadRequestName"},
+										{"$ref": "#/components/schemas/BadRequestFavorite"},
+										{"$ref": "#/components/schemas/BadRequestMissingSubtypeWithGroupOrName"},
+										{"$ref": "#/components/schemas/BadRequestMissingSubtypeWithFavorite"},
+										{"$ref": "#/components/schemas/BadRequestInvalidDateTime"}
+									]
 								},
-								"example": {
-									"base": "<base_url>",
-									"id": "<asset_id>",
-									"type": "asset",
-									"subtype": "image",
-									"created": "<created_date>",
-									"updated": "<updated_date>",
-									"links": {
-										"self": {
-											"href": "assets/<asset_id>"
-										},
-										"/rels/master_create": {
-											"href": "assets/<asset_id>/master"
-										},
-										"/rels/xmp_develop_create": {
-											"href": "assets/<asset_id>/xmp/develop"
-										},
-										"/rels/rendition_type/<rendition_type>": {
-											"href": "assets/<asset_id>/renditions/<rendition_type>"
-										},
-										"/rels/xmp/develop": {
-											"href": "assets/<asset_id>/xmp/develop",
-											"invalid": "true",
-											"fileSize": "<external_xmp_develop_setting_file_size>"
-										}
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/BadRequestGUIDExample"
 									},
-									"payload": {
-										"captureDate": "<image_capture_date>",
-										"importSource": {
-											"fileName": "<file_name>",
-											"fileSize": "<image_file_size>",
-											"originalWidth": "<image_width>",
-											"originalHeight": "<image_height>",
-											"sha256": "<image_sha256>",
-											"importedOnDevice": "<import_device_name>",
-											"importedBy": "<import_account_id>",
-											"importTimestamp": "<import_time>"
-										},
-										"<key>": "<value>",
-										"develop": {
-											"<dev_key>": "<dev_value>"
-										}
+									"BadRequestAssetIds": {
+										"$ref": "#/components/examples/BadRequestAssetIdsExample"
+									},
+									"BadRequestGroup": {
+										"$ref": "#/components/examples/BadRequestGroupExample"
+									},
+									"BadRequestName": {
+										"$ref": "#/components/examples/BadRequestNameExample"
+									},
+									"BadRequestFavorite": {
+										"$ref": "#/components/examples/BadRequestFavoriteExample"
+									},
+									"BadRequestMissingSubtypeWithGroupOrName": {
+										"$ref": "#/components/examples/BadRequestMissingSubtypeWithGroupOrNameExample"
+									},
+									"BadRequestMissingSubtypeWithFavorite": {
+										"$ref": "#/components/examples/BadRequestMissingSubtypeWithFavoriteExample"
+									},
+									"BadRequestInvalidDateTime": {
+										"$ref": "#/components/examples/BadRequestInvalidDateTimeExample"
 									}
 								}
-							},
-								{
-									"type": "object",
-									"properties": {
-										"base" : {
-											"type": "string",
-											"description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
-										},
-										"id": {
-											"$ref": "#/components/schemas/uuid"
-										},
-										"type": {
-											"type": "string",
-											"enum": ["asset"]
-										},
-										"subtype": {
-											"type": "string"
-										},
-										"created": {
-											"$ref": "#/components/schemas/utcDateTime"
-										},
-										"updated": {
-											"$ref": "#/components/schemas/utcDateTime"
-										},
-										"links": {
-											"type": "object"
-										},
-										"payload": {
-											"type": "object"
-										},
-										"favorites": {
-											"type": "object",
-											"properties" : {
-												"account_id": {
-													"$ref": "#/components/schemas/utcDateTime"
-												}
-											}
-
-										},
-										"fingerprint": {
-											"type": "object"
-										}
-									},
-									"example": {
-										"base": "<base_url>",
-										"id": "<asset_id>",
-										"links": {
-											"self": {
-												"href": "assets/<asset_id>"
-											},
-											"/rels/master_create": {
-												"href": "assets/<asset_id>/master"
-											},
-											"/rels/xmp_develop_create": {
-												"href": "assets/<asset_id>/xmp/develop"
-											},
-											"/rels/rendition_type/<rendition_type>": {
-												"href": "assets/<asset_id>/renditions/<rendition_type>"
-											},
-											"/rels/xmp/develop": {
-												"href": "assets/<asset_id>/xmp/develop",
-												"invalid": "true",
-												"fileSize": "<external_xmp_develop_setting_file_size>"
-											}
-										},
-										"created": "<created_date>",
-										"updated": "<updated_date>",
-										"subtype": "video",
-										"unshareable": "<unshareable>",
-										"payload": {
-											"captureDate": "<image_capture_date>",
-											"importSource": {
-												"fileName": "<file_name>",
-												"fileSize": "<image_file_size>",
-												"originalWidth": "<image_width>",
-												"originalHeight": "<image_height>",
-												"sha256": "<image_sha256>",
-												"importedOnDevice": "<import_device_name>",
-												"importedBy": "<import_account_id>",
-												"importTimestamp": "<import_time>"
-											},
-											"video": {
-												"frameRate": [
-													"<video_frame_rate_numerator>",
-													"<video_frame_rate_denominator>"
-												],
-												"duration": [
-													"<video_duration_numerator>",
-													"<video_duration_denominator>"
-												],
-												"displayAspectRatio": [
-													"<video_aspect_ratio_numerator>",
-													"<video_aspect_ratio_denominator>"
-												],
-												"storageWidth": "<video_storage_width>",
-												"storageHeight": "<video_storage_height>"
-											},
-											"<key>": "<value>",
-											"develop": {
-												"<dev_key>": "<dev_value>"
-											}
-										},
-										"favorites": {
-											"<account_id>": "<created_date>"
-										}
-									}
-								}
-							]}}}
+							}
+						}
 					},
-					"400": { "description": "The request failed due to an invalid input.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/BadRequestAssetIds/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestGroup/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestName/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestFavorite/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestMissingSubtypeWithGroupOrName/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestMissingSubtypeWithFavorite/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestInvalidDateTime/content/application~1json/schema"
-							}]}}}},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/ForbiddenClient/content/application~1json/schema"
-							}]}}}},
+					"403": {
+ 						"description": "The request failed due to insufficient permissions",
+ 						"content": {
+ 							"application/json": {
+ 								"schema": {
+ 									"oneOf": [
+ 										{"$ref": "#/components/schemas/ForbiddenKeyError"},
+ 										{"$ref": "#/components/schemas/ForbiddenClientError"}
+ 									]
+ 								},
+ 								"examples": {
+ 									"InvalidApiKey": {
+ 										"$ref": "#/components/examples/ForbiddenKeyExample"
+ 									},
+ 									"ForbiddenClient": {
+ 										"$ref": "#/components/examples/ForbiddenClientErrorExample"
+ 									}
+ 								}
+ 							}
+ 						}
+ 					},
 					"503": {
 						"$ref": "#/components/responses/ServiceUnavailable"
 					}
@@ -1075,384 +973,95 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"type": "object",
-							"properties": {
-								"base" : {
-									"type": "string",
-									"description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
+ 						"description": "OK",
+ 						"content": {
+ 							"application/json": {
+ 								"schema": {
+ 									"oneOf": [
+ 										{"$ref": "#/components/schemas/Success"},
+ 										{"$ref": "#/components/schemas/SuccessAssetIdsQueryParam"}
+ 									]
+ 								},
+ 								"examples": {
+ 									"Success": {
+ 										"$ref": "#/components/examples/SuccessExample"
+ 									},
+ 									"SuccessQueryParam": {
+ 										"$ref": "#/components/examples/SuccessQueryParamExample"
+ 									}
+ 								}
+ 							}
+ 						}
+ 					},
+					"400": {
+						"description": "The request failed due to an invalid input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{"$ref": "#/components/schemas/BadRequestGUID"},
+										{"$ref": "#/components/schemas/BadRequestAssetIds"},
+										{"$ref": "#/components/schemas/BadRequestGroup"},
+										{"$ref": "#/components/schemas/BadRequestName"},
+										{"$ref": "#/components/schemas/BadRequestFavorite"},
+										{"$ref": "#/components/schemas/BadRequestMissingSubtypeWithGroupOrName"},
+										{"$ref": "#/components/schemas/BadRequestMissingSubtypeWithFavorite"},
+										{"$ref": "#/components/schemas/BadRequestInvalidDateTime"}
+									]
 								},
-								"resources": {
-									"type": "array",
-									"items": {
-										"type": "object",
-										"properties": {
-											"id": {
-												"$ref": "#/components/schemas/uuid"
-											},
-											"type": {
-												"type": "string",
-												"enum": ["asset"]
-											},
-											"subtype": {
-												"type": "string"
-											},
-											"created": {
-												"$ref": "#/components/schemas/utcDateTime"
-											},
-											"updated": {
-												"$ref": "#/components/schemas/utcDateTime"
-											},
-											"links": {
-												"type": "object"
-											},
-											"payload": {
-												"type": "object"
-											}
-										}
-									}
-								}
-							},
-							"example": {
-								"base": "<base_url>",
-								"resources": [
-									{
-										"id": "<asset_id>",
-										"type": "asset",
-										"subtype": "image",
-										"created": "<created_date>",
-										"updated": "<updated_date>",
-										"links": {
-											"self": {
-												"href": "assets/<asset_id>"
-											},
-											"/rels/master_create": {
-												"href": "assets/<asset_id>/master"
-											},
-											"/rels/xmp_develop_create": {
-												"href": "assets/<asset_id>/xmp/develop"
-											},
-											"/rels/rendition_type/<rendition_type>": {
-												"href": "assets/<asset_id>/renditions/<rendition_type>"
-											},
-											"/rels/xmp/develop": {
-												"href": "assets/<asset_id>/xmp/develop",
-												"invalid": "true",
-												"fileSize": "<external_xmp_develop_setting_file_size>"
-											}
-										},
-										"payload": {
-											"captureDate": "<image_capture_date>",
-											"importSource": {
-												"fileName": "<file_name>",
-												"fileSize": "<image_file_size>",
-												"originalWidth": "<image_width>",
-												"originalHeight": "<image_height>",
-												"sha256": "<image_sha256>",
-												"importedOnDevice": "<import_device_name>",
-												"importedBy": "<import_account_id>",
-												"importTimestamp": "<import_time>"
-											},
-											"<key>": "<value>",
-											"develop": {
-												"<dev_key>": "<dev_value>"
-											}
-										}
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/BadRequestGUIDExample"
 									},
-									{
-										"id": "<asset_id>",
-										"type": "asset",
-										"subtype": "video",
-										"created": "<created_date>",
-										"updated": "<updated_date>",
-										"links": {
-											"self": {
-												"href": "assets/<asset_id>"
-											},
-											"/rels/master_create": {
-												"href": "assets/<asset_id>/master"
-											},
-											"/rels/xmp_develop_create": {
-												"href": "assets/<asset_id>/xmp/develop"
-											},
-											"/rels/rendition_type/<rendition_type>": {
-												"href": "assets/<asset_id>/renditions/<rendition_type>"
-											},
-											"/rels/xmp/develop": {
-												"href": "assets/<asset_id>/xmp/develop",
-												"invalid": "true",
-												"fileSize": "<external_xmp_develop_setting_file_size>"
-											}
-										},
-										"unshareable": "<unshareable>",
-										"payload": {
-											"captureDate": "<image_capture_date>",
-											"importSource": {
-												"fileName": "<file_name>",
-												"fileSize": "<image_file_size>",
-												"originalWidth": "<image_width>",
-												"originalHeight": "<image_height>",
-												"sha256": "<image_sha256>",
-												"importedOnDevice": "<import_device_name>",
-												"importedBy": "<import_account_id>",
-												"importTimestamp": "<import_time>"
-											},
-											"video": {
-												"frameRate": [
-													"<video_frame_rate_numerator>",
-													"<video_frame_rate_denominator>"
-												],
-												"duration": [
-													"<video_duration_numerator>",
-													"<video_duration_denominator>"
-												],
-												"displayAspectRatio": [
-													"<video_aspect_ratio_numerator>",
-													"<video_aspect_ratio_denominator>"
-												],
-												"storageWidth": "<video_storage_width>",
-												"storageHeight": "<video_storage_height>"
-											},
-											"<key>": "<value>",
-											"develop": {
-												"<dev_key>": "<dev_value>"
-											}
-										}
-									}
-								],
-								"links": {
-									"prev": {
-										"href": "albums/<album_id>/assets?captured_after=<first_captured_date>"
+									"BadRequestAssetIds": {
+										"$ref": "#/components/examples/BadRequestAssetIdsExample"
 									},
-									"next": {
-										"href": "albums/<album_id>/assets?captured_before=<last_captured_date>"
+									"BadRequestGroup": {
+										"$ref": "#/components/examples/BadRequestGroupExample"
 									},
-									"/rels/asset": {
-										"href": "assets/{asset_id}",
-										"templated": true
+									"BadRequestName": {
+										"$ref": "#/components/examples/BadRequestNameExample"
+									},
+									"BadRequestFavorite": {
+										"$ref": "#/components/examples/BadRequestFavoriteExample"
+									},
+									"BadRequestMissingSubtypeWithGroupOrName": {
+										"$ref": "#/components/examples/BadRequestMissingSubtypeWithGroupOrNameExample"
+									},
+									"BadRequestMissingSubtypeWithFavorite": {
+										"$ref": "#/components/examples/BadRequestMissingSubtypeWithFavoriteExample"
+									},
+									"BadRequestInvalidDateTime": {
+										"$ref": "#/components/examples/BadRequestInvalidDateTimeExample"
 									}
 								}
 							}
-						},
-							{
-								"type": "object",
-								"properties": {
-									"base" : {
-										"type": "string",
-										"description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
-									},
-									"resources": {
-										"type": "array",
-										"items": {
-											"type": "object",
-											"properties": {
-												"id": {
-													"$ref": "#/components/schemas/uuid"
-												},
-												"type": {
-													"type": "string",
-													"enum": ["asset"]
-												},
-												"subtype": {
-													"type": "string"
-												},
-												"created": {
-													"$ref": "#/components/schemas/utcDateTime"
-												},
-												"updated": {
-													"$ref": "#/components/schemas/utcDateTime"
-												},
-												"links": {
-													"type": "object"
-												},
-												"payload": {
-													"type": "object"
-												}
-											}
-										}
-									},
-									"errors": {
-										"type": "array",
-										"items": {
-											"type": "object",
-											"properties": {
-												"id": {
-													"$ref": "#/components/schemas/uuid"
-												},
-												"code": {
-													"type": "integer"
-												},
-												"description": {
-													"type": "string"
-												}
-											}
-										}
-									},
-									"links": {
-										"type": "object"
-									}
-								},
-								"example": {
-									"base": "<base_url>",
-									"resources": [
-										{
-											"id": "<asset_id>",
-											"type": "asset",
-											"subtype": "image",
-											"created": "<created_date>",
-											"updated": "<updated_date>",
-											"links": {
-												"self": {
-													"href": "assets/<asset_id>"
-												},
-												"/rels/master_create": {
-													"href": "assets/<asset_id>/master"
-												},
-												"/rels/xmp_develop_create": {
-													"href": "assets/<asset_id>/xmp/develop"
-												},
-												"/rels/rendition_type/<rendition_type>": {
-													"href": "assets/<asset_id>/renditions/<rendition_type>"
-												},
-												"/rels/xmp/develop": {
-													"href": "assets/<asset_id>/xmp/develop",
-													"invalid": "true",
-													"fileSize": "<external_xmp_develop_setting_file_size>"
-												}
-											},
-											"payload": {
-												"captureDate": "<image_capture_date>",
-												"importSource": {
-													"fileName": "<file_name>",
-													"fileSize": "<image_file_size>",
-													"originalWidth": "<image_width>",
-													"originalHeight": "<image_height>",
-													"sha256": "<image_sha256>",
-													"importedOnDevice": "<import_device_name>",
-													"importedBy": "<import_account_id>",
-													"importTimestamp": "<import_time>"
-												},
-												"<key>": "<value>",
-												"develop": {
-													"<dev_key>": "<dev_value>"
-												}
-											}
-										},
-										{
-											"id": "<asset_id>",
-											"type": "asset",
-											"subtype": "video",
-											"created": "<created_date>",
-											"updated": "<updated_date>",
-											"links": {
-												"self": {
-													"href": "assets/<asset_id>"
-												},
-												"/rels/master_create": {
-													"href": "assets/<asset_id>/master"
-												},
-												"/rels/xmp_develop_create": {
-													"href": "assets/<asset_id>/xmp/develop"
-												},
-												"/rels/rendition_type/<rendition_type>": {
-													"href": "assets/<asset_id>/renditions/<rendition_type>"
-												},
-												"/rels/xmp/develop": {
-													"href": "assets/<asset_id>/xmp/develop",
-													"invalid": "true",
-													"fileSize": "<external_xmp_develop_setting_file_size>"
-												}
-											},
-											"unshareable": "<unshareable>",
-											"payload": {
-												"captureDate": "<image_capture_date>",
-												"importSource": {
-													"fileName": "<file_name>",
-													"fileSize": "<image_file_size>",
-													"originalWidth": "<image_width>",
-													"originalHeight": "<image_height>",
-													"sha256": "<image_sha256>",
-													"importedOnDevice": "<import_device_name>",
-													"importedBy": "<import_account_id>",
-													"importTimestamp": "<import_time>"
-												},
-												"video": {
-													"frameRate": [
-														"<video_frame_rate_numerator>",
-														"<video_frame_rate_denominator>"
-													],
-													"duration": [
-														"<video_duration_numerator>",
-														"<video_duration_denominator>"
-													],
-													"displayAspectRatio": [
-														"<video_aspect_ratio_numerator>",
-														"<video_aspect_ratio_denominator>"
-													],
-													"storageWidth": "<video_storage_width>",
-													"storageHeight": "<video_storage_height>"
-												},
-												"<key>": "<value>",
-												"develop": {
-													"<dev_key>": "<dev_value>"
-												}
-											}
-										}
-									],
-									"errors": [
-										{
-											"id": "<asset_id>",
-											"code": 1000,
-											"description": "Resource not found"
-										}
-									],
-									"links": {
-										"/rels/asset": {
-											"href": "assets/{asset_id}",
-											"templated": true
-										}
-									}
-								}
-							}
-						]}}
 						}
 					},
-					"400": { "description": "The request failed due to an invalid input.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/BadRequestAssetIds/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestGroup/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestName/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestFavorite/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestMissingSubtypeWithGroupOrName/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestMissingSubtypeWithFavorite/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestInvalidDateTime/content/application~1json/schema"
-							}]}}}},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/ForbiddenClient/content/application~1json/schema"
-							}]}}}},
+					"403": {
+ 						"description": "The request failed due to insufficient permissions",
+ 						"content": {
+ 							"application/json": {
+ 								"schema": {
+ 									"oneOf": [
+ 										{"$ref": "#/components/schemas/ForbiddenKeyError"},
+ 										{"$ref": "#/components/schemas/ForbiddenClientError"}
+ 									]
+ 								},
+ 								"examples": {
+ 									"InvalidApiKey": {
+ 										"$ref": "#/components/examples/ForbiddenKeyExample"
+ 									},
+ 									"ForbiddenClient": {
+ 										"$ref": "#/components/examples/ForbiddenClientErrorExample"
+ 									}
+ 								}
+ 							}
+ 						}
+ 					},
 					"503": {
 						"$ref": "#/components/responses/ServiceUnavailable"
 					}
@@ -1646,41 +1255,35 @@
 							}
 						}
 					},
-					"400": { "description": "The request failed due to an invalid input.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/BadRequestSubtype/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestMissingParameter/content/application~1json/schema"
-							},
-							{
-								"type": "object",
-								"properties": {
-									"errors": {
-										"type": "object",
-										"properties": {
-											"rendition_type": {
-												"type": "array",
-												"items": {
-													"type": "string",
-													"enum": ["not supported"]
-												}
-											}
-										}
+					"400": {
+						"description": "The request failed due to an invalid input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{"$ref": "#/components/schemas/BadRequestGUID"},
+										{"$ref": "#/components/schemas/BadRequestSubtype"},
+										{"$ref": "#/components/schemas/BadRequestMissingParameter"},
+										{"$ref": "#/components/schemas/BadRequestRenditionType"}
+									]
+								},
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/BadRequestGUIDExample"
 									},
-									"code": {
-										"type": "integer",
-										"enum": [ 1005 ]
+									"BadRequestSubtype": {
+										"$ref": "#/components/examples/BadRequestSubtypeExample"
 									},
-									"description": {
-										"type": "string",
-										"enum": [ "Input Validation Error" ]
+									"BadRequestMissingParameter": {
+										"$ref": "#/components/examples/BadRequestMissingParameterExample"
+									},
+									"BadRequestRenditionType": {
+										"$ref": "#/components/examples/BadRequestRenditionTypeExample"
 									}
 								}
-							}]}}}},
+							}
+						}
+					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
@@ -1755,35 +1358,27 @@
 					"200": {
 						"description": "Asset rendition file. Response content type : image/jpeg"
 					},
-					"400": { "description": "The request failed due to an invalid input.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
-						},
-							{
-								"type": "object",
-								"properties": {
-									"errors": {
-										"type": "object",
-										"properties": {
-											"rendition_type": {
-												"type": "array",
-												"items": {
-													"type": "string",
-													"enum": ["not supported"]
-												}
-											}
-										}
+					"400": {
+						"description": "The request failed due to an invalid input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{"$ref": "#/components/schemas/BadRequestGUID"},
+										{"$ref": "#/components/schemas/BadRequestRenditionType"}
+									]
+								},
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/BadRequestGUIDExample"
 									},
-									"code": {
-										"type": "integer",
-										"enum": [ 1005 ]
-									},
-									"description": {
-										"type": "string",
-										"enum": [ "Input Validation Error" ]
+									"BadRequestRenditionType": {
+										"$ref": "#/components/examples/BadRequestRenditionTypeExample"
 									}
 								}
-							}]}}}},
+							}
+						}
+					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
@@ -1885,32 +1480,63 @@
 					"201": {
 						"description": "Created"
 					},
-					"400": { "description": "The request failed due to an invalid input.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/BadRequestGUID/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/BadRequestJSON/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestSubtype/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/BadRequestPayload/content/application~1json/schema"
-							}]}}}},
+					"400": {
+						"description": "The request failed due to an invalid input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{"$ref": "#/components/schemas/BadRequestGUID"},
+										{"$ref": "#/components/schemas/BadRequestSubtype"},
+										{"$ref": "#/components/schemas/BadRequestJSON"},
+										{"$ref": "#/components/schemas/BadRequestPayload"}
+									]
+								},
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/BadRequestGUIDExample"
+									},
+									"BadRequestSubtype": {
+										"$ref": "#/components/examples/BadRequestSubtypeExample"
+									},
+									"BadRequestJSON": {
+										"$ref": "#/components/examples/BadRequestJSONExample"
+									},
+									"BadRequestPayload": {
+										"$ref": "#/components/examples/BadRequestPayloadExample"
+									}
+								}
+							}
+						}
+					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/ForbiddenExists/content/application~1json/schema"
-							},
-							{
-								"$ref": "#/components/responses/ForbiddenQuota/content/application~1json/schema"
-							}]}}}},
+					"403": {
+ 						"description": "The request failed due to insufficient permissions",
+ 						"content": {
+ 							"application/json": {
+ 								"schema": {
+ 									"oneOf": [
+ 										{"$ref": "#/components/schemas/ForbiddenKeyError"},
+ 										{"$ref": "#/components/schemas/ResourceExistsError"},
+ 										{"$ref": "#/components/schemas/QuotaExceededError"}
+ 									]
+ 								},
+ 								"examples": {
+ 									"InvalidApiKey": {
+ 										"$ref": "#/components/examples/ForbiddenKeyExample"
+ 									},
+ 									"ResourceExists": {
+ 										"$ref": "#/components/examples/ResourceExistsErrorExample"
+ 									},
+ 									"QuotaExceeded": {
+ 										"$ref": "#/components/examples/AssetQuotaExceededErrorExample"
+ 									}
+ 								}
+ 							}
+ 						}
+ 					},
 					"404": {
 						"$ref": "#/components/responses/NotFound"
 					},
@@ -1977,13 +1603,21 @@
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/Forbidden/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-							}]}}}},
+					"403": {
+						"description": "The request failed due to insufficient permissions.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CatalogAccessError1"
+								},
+								"examples": {
+									"InvalidApiKey": {
+										"$ref": "#/components/examples/ForbiddenKeyExample"
+									}
+								}
+							}
+						}
+					},
 					"404": {
 						"$ref": "#/components/responses/NotFound"
 					},
@@ -2067,23 +1701,51 @@
 					"201": {
 						"description": "Created"
 					},
-					"400": { "description": "The request failed due to an invalid input.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/BadRequestJSON/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/BadRequestPayload/content/application~1json/schema"
-							}]}}}},
+					"400": {
+						"description": "The request failed due to an invalid input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{"$ref": "#/components/schemas/BadRequestJSON"},
+										{"$ref": "#/components/schemas/BadRequestPayload"}
+									]
+								},
+								"examples": {
+									"BadRequestJSON": {
+										"$ref": "#/components/examples/BadRequestJSONExample"
+									},
+									"BadRequestPayload": {
+										"$ref": "#/components/examples/BadRequestPayloadExample"
+									}
+								}
+							}
+						}
+					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/ForbiddenExists/content/application~1json/schema"
-							}]}}}},
+					"403": {
+ 						"description": "The request failed due to insufficient permissions",
+ 						"content": {
+ 							"application/json": {
+ 								"schema": {
+ 									"oneOf": [
+ 										{"$ref": "#/components/schemas/ForbiddenKeyError"},
+ 										{"$ref": "#/components/schemas/ResourceExistsError"}
+ 									]
+ 								},
+ 								"examples": {
+ 									"InvalidApiKey": {
+ 										"$ref": "#/components/examples/ForbiddenKeyExample"
+ 									},
+ 									"ResourceExists": {
+ 										"$ref": "#/components/examples/ResourceExistsErrorExample"
+ 									}
+ 								}
+ 							}
+ 						}
+ 					},
 					"415": {
 						"$ref": "#/components/responses/UnsupportedMediaType"
 					},
@@ -2225,16 +1887,21 @@
 					"401":{
 						"$ref":"#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/Forbidden/content/application~1json/schema"
-							},
-							{
-								"$ref":"#/components/responses/ForbiddenOperation/content/application~1json/schema"
-							}]}}}},
+					"403": {
+						"description": "The request failed due to insufficient permissions.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CatalogAccessError2"
+								},
+								"examples": {
+									"InvalidApiKey": {
+										"$ref": "#/components/examples/ForbiddenKeyExample"
+									}
+								}
+							}
+						}
+					},
 					"404":{
 						"$ref":"#/components/responses/NotFound"
 					},
@@ -2308,26 +1975,45 @@
 					"204": {
 						"description": "No Content"
 					},
-					"400": { "description": "The request failed due to an invalid input.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/BadRequestJSON/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/BadRequestPayload/content/application~1json/schema"
-							}]}}}},
+					"400": {
+						"description": "The request failed due to an invalid input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{"$ref": "#/components/schemas/BadRequestJSON"},
+										{"$ref": "#/components/schemas/BadRequestPayload"}
+									]
+								},
+								"examples": {
+									"BadRequestJSON": {
+										"$ref": "#/components/examples/BadRequestJSONExample"
+									},
+									"BadRequestPayload": {
+										"$ref": "#/components/examples/BadRequestPayloadExample"
+									}
+								}
+							}
+						}
+					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/Forbidden/content/application~1json/schema"
-							},
-							{
-								"$ref":"#/components/responses/ForbiddenOperation/content/application~1json/schema"
-							}]}}}},
+					"403": {
+						"description": "The request failed due to insufficient permissions.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CatalogAccessError2"
+								},
+								"examples": {
+									"InvalidApiKey": {
+										"$ref": "#/components/examples/ForbiddenKeyExample"
+									}
+								}
+							}
+						}
+					},
 					"415": {
 						"$ref": "#/components/responses/UnsupportedMediaType"
 					},
@@ -2399,16 +2085,21 @@
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/Forbidden/content/application~1json/schema"
-							},
-							{
-								"$ref":"#/components/responses/ForbiddenOperation/content/application~1json/schema"
-							}]}}}},
+					"403": {
+						"description": "The request failed due to insufficient permissions.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CatalogAccessError2"
+								},
+								"examples": {
+									"InvalidApiKey": {
+										"$ref": "#/components/examples/ForbiddenKeyExample"
+									}
+								}
+							}
+						}
+					},
 					"503": {
 						"$ref": "#/components/responses/ServiceUnavailable"
 					}
@@ -2535,13 +2226,21 @@
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/Forbidden/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-							}]}}}},
+					"403": {
+						"description": "The request failed due to insufficient permissions.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CatalogAccessError1"
+								},
+								"examples": {
+									"InvalidApiKey": {
+										"$ref": "#/components/examples/ForbiddenKeyExample"
+									}
+								}
+							}
+						}
+					},
 					"404": {
 						"$ref": "#/components/responses/NotFound"
 					},
@@ -2723,13 +2422,21 @@
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/Forbidden/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-							}]}}}},
+					"403": {
+						"description": "The request failed due to insufficient permissions.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CatalogAccessError1"
+								},
+								"examples": {
+									"InvalidApiKey": {
+										"$ref": "#/components/examples/ForbiddenKeyExample"
+									}
+								}
+							}
+						}
+					},
 					"404": {
 						"$ref": "#/components/responses/NotFound"
 					},
@@ -3105,16 +2812,21 @@
 					"401":{
 						"$ref":"#/components/responses/Unauthorized"
 					},
-					"403": { "description": "The request failed due to insufficient permissions.",
-						"content": { "application/json": { "schema": { "anyOf": [{
-							"$ref": "#/components/responses/ForbiddenKey/content/application~1json/schema"
-						},
-							{
-								"$ref": "#/components/responses/Forbidden/content/application~1json/schema"
-							},
-							{
-								"$ref":"#/components/responses/ForbiddenOperation/content/application~1json/schema"
-							}]}}}},
+					"403": {
+						"description": "The request failed due to insufficient permissions.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CatalogAccessError2"
+								},
+								"examples": {
+									"InvalidApiKey": {
+										"$ref": "#/components/examples/ForbiddenKeyExample"
+									}
+								}
+							}
+						}
+					},
 					"404":{
 						"$ref":"#/components/responses/NotFound"
 					},
@@ -3886,7 +3598,1218 @@
 				}
 			}
 		},
+		"examples": {
+			"SuccessImageAssetExample": {
+				"summary": "SuccessImageAsset",
+				"value": {
+					"base": "<base_url>",
+					"id": "<asset_id>",
+					"type": "asset",
+					"subtype": "image",
+					"created": "<created_date>",
+					"updated": "<updated_date>",
+					"links": {
+						"self": {
+							"href": "assets/<asset_id>"
+						},
+						"/rels/master_create": {
+							"href": "assets/<asset_id>/master"
+						},
+						"/rels/xmp_develop_create": {
+							"href": "assets/<asset_id>/xmp/develop"
+						},
+						"/rels/rendition_type/<rendition_type>": {
+							"href": "assets/<asset_id>/renditions/<rendition_type>"
+						},
+						"/rels/xmp/develop": {
+							"href": "assets/<asset_id>/xmp/develop",
+							"invalid": "true",
+							"fileSize": "<external_xmp_develop_setting_file_size>"
+						}
+					},
+					"payload": {
+						"captureDate": "<image_capture_date>",
+						"importSource": {
+							"fileName": "<file_name>",
+							"fileSize": "<image_file_size>",
+							"originalWidth": "<image_width>",
+							"originalHeight": "<image_height>",
+							"sha256": "<image_sha256>",
+							"importedOnDevice": "<import_device_name>",
+							"importedBy": "<import_account_id>",
+							"importTimestamp": "<import_time>"
+						},
+						"<key>": "<value>",
+						"develop": {
+							"<dev_key>": "<dev_value>"
+						}
+					}
+				}
+			},
+			"SuccessVideoAssetExample":{
+				"summary": "SuccessVideoAsset",
+				"value": {
+					"base": "<base_url>",
+					"id": "<asset_id>",
+					"links": {
+						"self": {
+							"href": "assets/<asset_id>"
+						},
+						"/rels/master_create": {
+							"href": "assets/<asset_id>/master"
+						},
+						"/rels/xmp_develop_create": {
+							"href": "assets/<asset_id>/xmp/develop"
+						},
+						"/rels/rendition_type/<rendition_type>": {
+							"href": "assets/<asset_id>/renditions/<rendition_type>"
+						},
+						"/rels/xmp/develop": {
+							"href": "assets/<asset_id>/xmp/develop",
+							"invalid": "true",
+							"fileSize": "<external_xmp_develop_setting_file_size>"
+						}
+					},
+					"created": "<created_date>",
+					"updated": "<updated_date>",
+					"subtype": "video",
+					"unshareable": "<unshareable>",
+					"payload": {
+						"captureDate": "<image_capture_date>",
+						"importSource": {
+							"fileName": "<file_name>",
+							"fileSize": "<image_file_size>",
+							"originalWidth": "<image_width>",
+							"originalHeight": "<image_height>",
+							"sha256": "<image_sha256>",
+							"importedOnDevice": "<import_device_name>",
+							"importedBy": "<import_account_id>",
+							"importTimestamp": "<import_time>"
+						},
+						"video": {
+							"frameRate": [
+								"<video_frame_rate_numerator>",
+								"<video_frame_rate_denominator>"
+							],
+							"duration": [
+								"<video_duration_numerator>",
+								"<video_duration_denominator>"
+							],
+							"displayAspectRatio": [
+								"<video_aspect_ratio_numerator>",
+								"<video_aspect_ratio_denominator>"
+							],
+							"storageWidth": "<video_storage_width>",
+							"storageHeight": "<video_storage_height>"
+						},
+						"<key>": "<value>",
+						"develop": {
+							"<dev_key>": "<dev_value>"
+						}
+					},
+					"favorites": {
+						"<account_id>": "<created_date>"
+					}
+				}
+			},
+			"SuccessExample": {
+				"summary": "Success",
+				"value": {
+					"base": "<base_url>",
+					"resources": [
+						{
+							"id": "<asset_id>",
+							"type": "asset",
+							"subtype": "image",
+							"created": "<created_date>",
+							"updated": "<updated_date>",
+							"links": {
+								"self": {
+									"href": "assets/<asset_id>"
+								},
+								"/rels/master_create": {
+									"href": "assets/<asset_id>/master"
+								},
+								"/rels/xmp_develop_create": {
+									"href": "assets/<asset_id>/xmp/develop"
+								},
+								"/rels/rendition_type/<rendition_type>": {
+									"href": "assets/<asset_id>/renditions/<rendition_type>"
+								},
+								"/rels/xmp/develop": {
+									"href": "assets/<asset_id>/xmp/develop",
+									"invalid": "true",
+									"fileSize": "<external_xmp_develop_setting_file_size>"
+								}
+							},
+							"payload": {
+								"captureDate": "<image_capture_date>",
+								"importSource": {
+									"fileName": "<file_name>",
+									"fileSize": "<image_file_size>",
+									"originalWidth": "<image_width>",
+									"originalHeight": "<image_height>",
+									"sha256": "<image_sha256>",
+									"importedOnDevice": "<import_device_name>",
+									"importedBy": "<import_account_id>",
+									"importTimestamp": "<import_time>"
+								},
+								"<key>": "<value>",
+								"develop": {
+									"<dev_key>": "<dev_value>"
+								}
+							}
+						},
+						{
+							"id": "<asset_id>",
+							"type": "asset",
+							"subtype": "video",
+							"created": "<created_date>",
+							"updated": "<updated_date>",
+							"links": {
+								"self": {
+									"href": "assets/<asset_id>"
+								},
+								"/rels/master_create": {
+									"href": "assets/<asset_id>/master"
+								},
+								"/rels/xmp_develop_create": {
+									"href": "assets/<asset_id>/xmp/develop"
+								},
+								"/rels/rendition_type/<rendition_type>": {
+									"href": "assets/<asset_id>/renditions/<rendition_type>"
+								},
+								"/rels/xmp/develop": {
+									"href": "assets/<asset_id>/xmp/develop",
+									"invalid": "true",
+									"fileSize": "<external_xmp_develop_setting_file_size>"
+								}
+							},
+							"unshareable": "<unshareable>",
+							"payload": {
+								"captureDate": "<image_capture_date>",
+								"importSource": {
+									"fileName": "<file_name>",
+									"fileSize": "<image_file_size>",
+									"originalWidth": "<image_width>",
+									"originalHeight": "<image_height>",
+									"sha256": "<image_sha256>",
+									"importedOnDevice": "<import_device_name>",
+									"importedBy": "<import_account_id>",
+									"importTimestamp": "<import_time>"
+								},
+								"video": {
+									"frameRate": [
+										"<video_frame_rate_numerator>",
+										"<video_frame_rate_denominator>"
+									],
+									"duration": [
+										"<video_duration_numerator>",
+										"<video_duration_denominator>"
+									],
+									"displayAspectRatio": [
+										"<video_aspect_ratio_numerator>",
+										"<video_aspect_ratio_denominator>"
+									],
+									"storageWidth": "<video_storage_width>",
+									"storageHeight": "<video_storage_height>"
+								},
+								"<key>": "<value>",
+								"develop": {
+									"<dev_key>": "<dev_value>"
+								}
+							}
+						}
+					],
+					"links": {
+						"prev": {
+							"href": "albums/<album_id>/assets?captured_after=<first_captured_date>"
+						},
+						"next": {
+							"href": "albums/<album_id>/assets?captured_before=<last_captured_date>"
+						},
+						"/rels/asset": {
+							"href": "assets/{asset_id}",
+							"templated": true
+						}
+					}
+				}
+			},
+			"SuccessQueryParamExample": {
+				"summary": "Success - Asset_ids query param present",
+				"value": {
+					"base": "<base_url>",
+					"resources": [
+						{
+							"id": "<asset_id>",
+							"type": "asset",
+							"subtype": "image",
+							"created": "<created_date>",
+							"updated": "<updated_date>",
+							"links": {
+								"self": {
+									"href": "assets/<asset_id>"
+								},
+								"/rels/master_create": {
+									"href": "assets/<asset_id>/master"
+								},
+								"/rels/xmp_develop_create": {
+									"href": "assets/<asset_id>/xmp/develop"
+								},
+								"/rels/rendition_type/<rendition_type>": {
+									"href": "assets/<asset_id>/renditions/<rendition_type>"
+								},
+								"/rels/xmp/develop": {
+									"href": "assets/<asset_id>/xmp/develop",
+									"invalid": "true",
+									"fileSize": "<external_xmp_develop_setting_file_size>"
+								}
+							},
+							"payload": {
+								"captureDate": "<image_capture_date>",
+								"importSource": {
+									"fileName": "<file_name>",
+									"fileSize": "<image_file_size>",
+									"originalWidth": "<image_width>",
+									"originalHeight": "<image_height>",
+									"sha256": "<image_sha256>",
+									"importedOnDevice": "<import_device_name>",
+									"importedBy": "<import_account_id>",
+									"importTimestamp": "<import_time>"
+								},
+								"<key>": "<value>",
+								"develop": {
+									"<dev_key>": "<dev_value>"
+								}
+							}
+						},
+						{
+							"id": "<asset_id>",
+							"type": "asset",
+							"subtype": "video",
+							"created": "<created_date>",
+							"updated": "<updated_date>",
+							"links": {
+								"self": {
+									"href": "assets/<asset_id>"
+								},
+								"/rels/master_create": {
+									"href": "assets/<asset_id>/master"
+								},
+								"/rels/xmp_develop_create": {
+									"href": "assets/<asset_id>/xmp/develop"
+								},
+								"/rels/rendition_type/<rendition_type>": {
+									"href": "assets/<asset_id>/renditions/<rendition_type>"
+								},
+								"/rels/xmp/develop": {
+									"href": "assets/<asset_id>/xmp/develop",
+									"invalid": "true",
+									"fileSize": "<external_xmp_develop_setting_file_size>"
+								}
+							},
+							"unshareable": "<unshareable>",
+							"payload": {
+								"captureDate": "<image_capture_date>",
+								"importSource": {
+									"fileName": "<file_name>",
+									"fileSize": "<image_file_size>",
+									"originalWidth": "<image_width>",
+									"originalHeight": "<image_height>",
+									"sha256": "<image_sha256>",
+									"importedOnDevice": "<import_device_name>",
+									"importedBy": "<import_account_id>",
+									"importTimestamp": "<import_time>"
+								},
+								"video": {
+									"frameRate": [
+										"<video_frame_rate_numerator>",
+										"<video_frame_rate_denominator>"
+									],
+									"duration": [
+										"<video_duration_numerator>",
+										"<video_duration_denominator>"
+									],
+									"displayAspectRatio": [
+										"<video_aspect_ratio_numerator>",
+										"<video_aspect_ratio_denominator>"
+									],
+									"storageWidth": "<video_storage_width>",
+									"storageHeight": "<video_storage_height>"
+								},
+								"<key>": "<value>",
+								"develop": {
+									"<dev_key>": "<dev_value>"
+								}
+							}
+						}
+					],
+					"errors": [
+						{
+							"id": "<asset_id>",
+							"code": 1000,
+							"description": "Resource not found"
+						}
+					],
+					"links": {
+						"/rels/asset": {
+							"href": "assets/{asset_id}",
+							"templated": true
+						}
+					}
+				}
+			},
+			"ForbiddenExistsExample": {
+				"summary": "ForbiddenExistsError",
+				"value": {
+					"errors": {
+						"<resource_type>": [
+							"already exists"
+						]
+					},
+					"code": 1002,
+					"description": "Resource already exists"
+				}
+				
+			},
+			"ForbiddenKeyExample": {
+				"summary": "Invalid API Key",
+				"value": {
+					"code": 403003,
+					"description": "API Key is invalid"
+				}
+			},
+			"ForbiddenClientErrorExample": {
+				"summary": "Forbidden Client",
+				"value": {
+					"links": {
+ 						"/rels/client_app": {
+ 					      		"href": "<app_url> (Link to the where to find a new version of the client application)"
+ 					    	}
+ 			  		},
+ 					"code": 4999,
+ 					"description": "Upgrade required"
+				}
+			},
+			"BadRequestGUIDExample": {
+				"summary": "BadRequestGUID",
+				"value": {
+					"errors": {"<param_name>": [ "Must be a valid GUID"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestJSONExample": {
+				"summary": "BadRequestJSON",
+				"value": {
+					"errors": {"<param_name>": [ "Must be a valid JSON"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestSubtypeExample": {
+				"summary": "BadRequestSubtype",
+				"value": {
+					"errors": {"<subtype>": [ "is invalid"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestPayloadExample": {
+				"summary": "BadRequestPayload",
+				"value": {
+					"errors": {"payload.<key>.<subkey>": [ "invalid"]},
+					"code": 1030,
+					"description": "Payload Validation Error"
+				}
+			},
+			"BadRequestAssetIdsExample": {
+				"summary": "ParamsWithAssetIds",
+				"value": {
+					"errors": {"<param_name>": [ "not allowed with asset_ids parameter"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestGroupExample": {
+				"summary": "BadRequestGroup",
+				"value": {
+					"errors": {"group": [ "group not expected for each given subtype" ]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestNameExample": {
+				"summary": "BadRequestName",
+				"value": {
+					"errors": {"name": [ "name not expected for each given subtype"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestFavoriteExample": {
+				"summary": "BadRequestFavorite",
+				"value": {
+					"errors": {"favorite": [ "favorite query param can only be true. favorite=false not supported"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestMissingParameterExample": {
+				"summary": "MissingParameter",
+				"value": {
+					"errors": {"parameter": [ "must be specified"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestMissingSubtypeWithGroupOrNameExample": {
+				"summary": "MissingSubtypeWithGroupOrName",
+				"value": {
+					"errors": {"subtype": [ "subtype value expected with group or name"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestMissingSubtypeWithFavoriteExample": {
+				"summary": "MissingSubtypeWithFavorite",
+				"value": {
+					"errors": {"subtype": [ "subtype value expected with favorite"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestInvalidDateTimeExample": {
+				"summary": "InvalidDateTime",
+				"value": {
+					"errors": {"<param_name>": [ "must be a valid XML Schema dateTime"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"BadRequestRenditionTypeExample": {
+				"summary": "RenditionTypeNotSupported",
+				"value": {
+					"errors": {"rendition_type": [ "not supported"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"ResourceExistsErrorExample": {
+				"summary": "ResourceExistsError",
+				"value": {
+					"errors": {"asset": [ "already exists"]},
+					"code": 1002,
+					"description": "Resource already exists"
+				}
+			},
+			"ForbiddenAccountExample": {
+				"summary": "Forbidden Account",
+				"value": {
+					"code": 4301,
+					"description": "Access forbidden due to account state of resource owner"
+				}
+			},
+			"AssetQuotaExceededErrorExample": {
+				"summary": "QuotaExceededError",
+				"value": {
+					"errors": {"<asset_id>": [ "quota exceeded"]},
+					"code": 1043,
+					"description": "Too many assets"
+					
+				}
+			}
+		},
 		"schemas": {
+			"SuccessImageAsset": {
+				"type": "object",
+				"properties": {
+					"base" : {
+						"type": "string",
+						"description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
+					},
+					"id": {
+						"$ref": "#/components/schemas/uuid"
+					},
+					"type": {
+						"type": "string",
+						"enum": ["asset"]
+					},
+					"subtype": {
+						"type": "string"
+					},
+					"created": {
+						"$ref": "#/components/schemas/utcDateTime"
+					},
+					"updated": {
+						"$ref": "#/components/schemas/utcDateTime"
+					},
+					"links": {
+						"type": "object"
+					},
+					"payload": {
+						"type": "object"
+					}
+				}
+			},
+			"SuccessVideoAsset":{
+				"type": "object",
+				"properties": {
+					"base" : {
+						"type": "string",
+						"description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
+					},
+					"id": {
+						"$ref": "#/components/schemas/uuid"
+					},
+					"type": {
+						"type": "string",
+						"enum": ["asset"]
+					},
+					"subtype": {
+						"type": "string"
+					},
+					"created": {
+						"$ref": "#/components/schemas/utcDateTime"
+					},
+					"updated": {
+						"$ref": "#/components/schemas/utcDateTime"
+					},
+					"links": {
+						"type": "object"
+					},
+					"payload": {
+						"type": "object"
+					},
+					"favorites": {
+						"type": "object",
+						"properties" : {
+							"account_id": {
+								"$ref": "#/components/schemas/utcDateTime"
+							}
+						}
+
+					},
+					"fingerprint": {
+						"type": "object"
+					}
+				}
+			},
+			"Success": {
+				"type": "object",
+				"properties": {
+					"base" : {
+						"type": "string",
+						"description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
+					},
+					"resources": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"$ref": "#/components/schemas/uuid"
+								},
+								"type": {
+									"type": "string",
+									"enum": ["asset"]
+								},
+								"subtype": {
+									"type": "string"
+								},
+								"created": {
+									"$ref": "#/components/schemas/utcDateTime"
+								},
+								"updated": {
+									"$ref": "#/components/schemas/utcDateTime"
+								},
+								"links": {
+									"type": "object"
+								},
+								"payload": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			},
+			"SuccessAssetIdsQueryParam": {
+				"type": "object",
+				"properties": {
+					"base" : {
+						"type": "string",
+						"description": "Base URL that can be prepended to the 'href' values in the 'links' to produce fully qualified URLs for future queries."
+					},
+					"resources": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"$ref": "#/components/schemas/uuid"
+								},
+								"type": {
+									"type": "string",
+									"enum": ["asset"]
+								},
+								"subtype": {
+									"type": "string"
+								},
+								"created": {
+									"$ref": "#/components/schemas/utcDateTime"
+								},
+								"updated": {
+									"$ref": "#/components/schemas/utcDateTime"
+								},
+								"links": {
+									"type": "object"
+								},
+								"payload": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"errors": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"$ref": "#/components/schemas/uuid"
+								},
+								"code": {
+									"type": "integer"
+								},
+								"description": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"links": {
+						"type": "object"
+					}
+				}
+			},
+			"BadRequestGUID": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"<param_name>": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "Must be a valid GUID"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestJSON": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"body": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "Must be valid JSON"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestSubtype": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"<subtype>": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "is invalid"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestPayload": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"payload.<key>.<subkey>": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "invalid", "disallowed", "required" ]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1030 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Payload Validation Error" ]
+					}
+				}
+			},
+			"BadRequestAssetIds": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"<param_name>": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "not allowed with asset_ids parameter"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestGroup": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"group": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "group not expected for each given subtype"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestName": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": ["name not expected for each given subtype"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestFavorite": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"favorite": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": ["favorite query param can only be true. favorite=false not supported"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestMissingParameter": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"parameter": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": ["must be specified"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestMissingSubtypeWithGroupOrName": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"subtype": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": ["subtype value expected with group or name"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestMissingSubtypeWithFavorite": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"subtype": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": ["subtype value expected with favorite"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"BadRequestInvalidDateTime": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"<param_name>": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "must be a valid XML Schema dateTime"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}	
+			},
+			"BadRequestRenditionType": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"rendition_type": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": ["not supported"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1005 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"CatalogAccessError": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 403003, 4300, 4301]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "API Key is invalid", "Access is forbidden", "Access forbidden due to account state of resource owner"]
+					}
+				}
+			},
+			"CatalogAccessError1": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 403003, 4300]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "API Key is invalid", "Access is forbidden"]
+					}
+				}
+			},
+			"CatalogAccessError2": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 403003, 4300, 1016]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "API Key is invalid", "Access is forbidden", "Requested operation not permitted"]
+					}
+				}
+			},
+			"ForbiddenExistsError": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"<resource_type>": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "already exists"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1002 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Resource already exists" ]
+					}
+				}			
+			},
+			"ForbiddenClientError": {
+ 				"type": "object",
+ 				"properties": {
+ 					"code": {
+ 						"type": "integer",
+ 						"enum": [ 4999 ]
+ 					},
+ 					"description": {
+ 						"type": "string",
+ 						"enum": [ "Upgrade required" ]
+ 					},
+ 					"links": {
+ 						"type": "object",
+ 						"properties": {
+ 							"/rels/client_app": {
+ 								"type": "object",
+ 								"properties": {
+ 									"href": {
+ 										"type": "string",
+ 										"enum": ["<app_url> (Link to the where to find a new version of the client application)"]
+ 									}
+ 								}
+ 							}
+ 						}
+ 					}
+ 				}
+ 			},
+			"ForbiddenKeyError": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 403003]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "API Key is invalid"]
+					}
+				}
+			},
+			"ForbiddenAccountError": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 4301]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Access forbidden due to account state of resource owner"]
+					}
+				}
+			},
+			"ForbiddenError": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 4300]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Access is forbidden"]
+					}
+				}
+			},
+			
+			"Error": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer"
+					},
+					"description": {
+						"type": "string"
+					}
+				}
+			},
+			"ResourceExistsError": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"<resource_type>": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "already exists"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1002 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Resource already exists" ]
+					}
+				}
+			},
+			"QuotaExceededError": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"<asset_id>": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "quota exceeded"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1043 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Too many assets" ]
+					}
+				}
+			},
 			"iso8601DateTime": {
 				"pattern": "^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3})-((02-([1-2][0-9]|0[1-9]))|((01|03|05|07|08|10|12)-(3[0-1]|[1-2][0-9]|0[1-9]))|((04|06|09|11)-(30|[1-2][0-9]|0[1-9])))T(2[0-3]|[0-1][0-9]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(((\\+|-)(2[0-3]|[0-1][0-9])(:?[0-5][0-9])?)|Z)?$",
 				"type": "string",

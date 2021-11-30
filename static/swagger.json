@@ -249,9 +249,6 @@
 							}
 						}
 					},
-					"400": {
-						"$ref": "#/components/responses/BadRequestGUID"
-					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
@@ -259,8 +256,20 @@
 						"$ref": "#/components/responses/ForbiddenKey"
 					},
 					"404": {
-						"$ref": "#/components/responses/NotFound"
-					},
+ 						"description": "The request failed because the resource being requested does not exist.",
+ 						"content": {
+ 							"application/json": {
+ 								"schema": {
+ 									"$ref": "#/components/schemas/NotFound"
+ 								},
+ 								"examples": {
+ 									"ResourceNotFound": {
+ 										"$ref": "#/components/examples/AccountNotFoundExample"
+ 									}
+ 								}
+ 							}
+ 						}
+ 					},
 					"503": {
 						"$ref": "#/components/responses/ServiceUnavailable"
 					}
@@ -490,9 +499,6 @@
 							}
 						}
 					},
-					"400": {
-						"$ref": "#/components/responses/BadRequestGUID"
-					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
 					},
@@ -512,7 +518,19 @@
 						}
 					},
 					"404": {
-						"$ref": "#/components/responses/NotFound"
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/CatalogNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"503": {
 						"$ref": "#/components/responses/ServiceUnavailable"
@@ -642,7 +660,7 @@
 								},
 								"examples": {
 									"BadRequestGUID": {
-										"$ref": "#/components/examples/BadRequestGUIDExample"
+										"$ref": "#/components/examples/AssetBadRequestGUIDExample"
 									},
 									"BadRequestJSON": {
 										"$ref": "#/components/examples/BadRequestJSONExample"
@@ -686,7 +704,19 @@
 						}
 					},
 					"404": {
-						"$ref": "#/components/responses/NotFound"
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/AssetNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"415": {
 						"$ref": "#/components/responses/UnsupportedMediaType"
@@ -781,7 +811,7 @@
 								},
 								"examples": {
 									"BadRequestGUID": {
-										"$ref": "#/components/examples/BadRequestGUIDExample"
+										"$ref": "#/components/examples/AssetBadRequestGUIDExample"
 									},
 									"BadRequestAssetIds": {
 										"$ref": "#/components/examples/BadRequestAssetIdsExample"
@@ -1011,7 +1041,7 @@
 								},
 								"examples": {
 									"BadRequestGUID": {
-										"$ref": "#/components/examples/BadRequestGUIDExample"
+										"$ref": "#/components/examples/AssetBadRequestGUIDExample"
 									},
 									"BadRequestAssetIds": {
 										"$ref": "#/components/examples/BadRequestAssetIdsExample"
@@ -1144,7 +1174,19 @@
 						"description": "Created"
 					},
 					"400": {
-						"$ref": "#/components/responses/BadRequestGUID"
+						"description": "The request failed due to an invalid resource identifier.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestGUID"
+								},
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/AssetBadRequestGUIDExample"
+									}
+								}
+							}
+						}
 					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
@@ -1269,7 +1311,7 @@
 								},
 								"examples": {
 									"BadRequestGUID": {
-										"$ref": "#/components/examples/BadRequestGUIDExample"
+										"$ref": "#/components/examples/AssetBadRequestGUIDExample"
 									},
 									"BadRequestSubtype": {
 										"$ref": "#/components/examples/BadRequestSubtypeExample"
@@ -1291,7 +1333,19 @@
 						"$ref": "#/components/responses/ForbiddenKey"
 					},
 					"404": {
-						"$ref": "#/components/responses/NotFound"
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/AssetNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"503": {
 						"$ref": "#/components/responses/ServiceUnavailable"
@@ -1370,7 +1424,7 @@
 								},
 								"examples": {
 									"BadRequestGUID": {
-										"$ref": "#/components/examples/BadRequestGUIDExample"
+										"$ref": "#/components/examples/RenditionBadRequestGUIDExample"
 									},
 									"BadRequestRenditionType": {
 										"$ref": "#/components/examples/BadRequestRenditionTypeExample"
@@ -1383,7 +1437,19 @@
 						"$ref": "#/components/responses/Unauthorized"
 					},
 					"404": {
-						"$ref": "#/components/responses/NotFound"
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/RenditionNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"503": {
 						"$ref": "#/components/responses/ServiceUnavailable"
@@ -1494,7 +1560,7 @@
 								},
 								"examples": {
 									"BadRequestGUID": {
-										"$ref": "#/components/examples/BadRequestGUIDExample"
+										"$ref": "#/components/examples/AssetBadRequestGUIDExample"
 									},
 									"BadRequestSubtype": {
 										"$ref": "#/components/examples/BadRequestSubtypeExample"
@@ -1538,7 +1604,19 @@
  						}
  					},
 					"404": {
-						"$ref": "#/components/responses/NotFound"
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/AssetNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"415": {
 						"$ref": "#/components/responses/UnsupportedMediaType"
@@ -1598,7 +1676,19 @@
 						"description": "External XMP Develop Setting file. Content type of the response is application/rdf+xml."
 					},
 					"400": {
-						"$ref": "#/components/responses/BadRequestGUID"
+						"description": "The request failed due to an invalid resource identifier.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestGUID"
+								},
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/AssetBadRequestGUIDExample"
+									}
+								}
+							}
+						}
 					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
@@ -1619,7 +1709,19 @@
 						}
 					},
 					"404": {
-						"$ref": "#/components/responses/NotFound"
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/AssetNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"503": {
 						"$ref": "#/components/responses/ServiceUnavailable"
@@ -1740,7 +1842,7 @@
  										"$ref": "#/components/examples/ForbiddenKeyExample"
  									},
  									"ResourceExists": {
- 										"$ref": "#/components/examples/ResourceExistsErrorExample"
+ 										"$ref": "#/components/examples/AlbumResourceExistsErrorExample"
  									}
  								}
  							}
@@ -1902,8 +2004,20 @@
 							}
 						}
 					},
-					"404":{
-						"$ref":"#/components/responses/NotFound"
+					"404": {
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/AlbumNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"503":{
 						"$ref":"#/components/responses/ServiceUnavailable"
@@ -2221,7 +2335,19 @@
 
 					},
 					"400": {
-						"$ref": "#/components/responses/BadRequestGUID"
+						"description": "The request failed due to an invalid resource identifier.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestGUID"
+								},
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/CatalogBadRequestGUIDExample"
+									}
+								}
+							}
+						}
 					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
@@ -2242,7 +2368,19 @@
 						}
 					},
 					"404": {
-						"$ref": "#/components/responses/NotFound"
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/AlbumNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"415": {
 						"$ref": "#/components/responses/UnsupportedMediaType"
@@ -2417,7 +2555,19 @@
 
 					},
 					"400": {
-						"$ref": "#/components/responses/BadRequestGUID"
+						"description": "The request failed due to an invalid resource identifier.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestGUID"
+								},
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/AlbumBadRequestGUIDExample"
+									}
+								}
+							}
+						}
 					},
 					"401": {
 						"$ref": "#/components/responses/Unauthorized"
@@ -2438,7 +2588,19 @@
 						}
 					},
 					"404": {
-						"$ref": "#/components/responses/NotFound"
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/AlbumNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"503": {
 						"$ref": "#/components/responses/ServiceUnavailable"
@@ -2807,7 +2969,19 @@
 						}
 					},
 					"400":{
-						"$ref":"#/components/responses/BadRequestGUID"
+						"description": "The request failed due to an invalid resource identifier.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BadRequestGUID"
+								},
+								"examples": {
+									"BadRequestGUID": {
+										"$ref": "#/components/examples/AlbumBadRequestGUIDExample"
+									}
+								}
+							}
+						}
 					},
 					"401":{
 						"$ref":"#/components/responses/Unauthorized"
@@ -2827,8 +3001,20 @@
 							}
 						}
 					},
-					"404":{
-						"$ref":"#/components/responses/NotFound"
+					"404": {
+						"description": "The request failed because the resource being requested does not exist.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFound"
+								},
+								"examples": {
+									"ResourceNotFound": {
+										"$ref": "#/components/examples/AlbumNotFoundExample"
+									}
+								}
+							}
+						}
 					},
 					"503":{
 						"$ref":"#/components/responses/ServiceUnavailable"
@@ -2867,6 +3053,9 @@
 									"enum": [ "Input Validation Error" ]
 								}
 							}
+						},
+						"examples": { 
+							"BadRequestGUID": { "$ref":"#/components/examples/AssetBadRequestGUIDExample" }
 						}
 					}
 				}
@@ -3651,6 +3840,10 @@
 				"value": {
 					"base": "<base_url>",
 					"id": "<asset_id>",
+					"type": "asset",
+					"subtype": "video",
+					"created": "<created_date>",
+					"updated": "<updated_date>",
 					"links": {
 						"self": {
 							"href": "assets/<asset_id>"
@@ -3670,9 +3863,6 @@
 							"fileSize": "<external_xmp_develop_setting_file_size>"
 						}
 					},
-					"created": "<created_date>",
-					"updated": "<updated_date>",
-					"subtype": "video",
 					"unshareable": "<unshareable>",
 					"payload": {
 						"captureDate": "<image_capture_date>",
@@ -3991,34 +4181,58 @@
  					"description": "Upgrade required"
 				}
 			},
-			"BadRequestGUIDExample": {
-				"summary": "BadRequestGUID",
+			"AssetBadRequestGUIDExample": {
+				"summary": "InvalidRequestGUID",
 				"value": {
-					"errors": {"<param_name>": [ "Must be a valid GUID"]},
+					"errors": {"asset_id": [ "Must be a valid GUID"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"CatalogBadRequestGUIDExample": {
+				"summary": "InvalidRequestGUID",
+				"value": {
+					"errors": {"catalog_id": [ "Must be a valid GUID"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"AlbumBadRequestGUIDExample": {
+				"summary": "InvalidRequestGUID",
+				"value": {
+					"errors": {"album_id": [ "Must be a valid GUID"]},
+					"code": 1005,
+					"description": "Input Validation Error"
+				}
+			},
+			"RenditionBadRequestGUIDExample": {
+				"summary": "InvalidRequestGUID",
+				"value": {
+					"errors": {"rendition_id": [ "Must be a valid GUID"]},
 					"code": 1005,
 					"description": "Input Validation Error"
 				}
 			},
 			"BadRequestJSONExample": {
-				"summary": "BadRequestJSON",
+				"summary": "InvalidRequestJSON",
 				"value": {
-					"errors": {"<param_name>": [ "Must be a valid JSON"]},
+					"errors": {"body": [ "Must be a valid JSON"]},
 					"code": 1005,
 					"description": "Input Validation Error"
 				}
 			},
 			"BadRequestSubtypeExample": {
-				"summary": "BadRequestSubtype",
+				"summary": "InvalidRequestSubtype",
 				"value": {
-					"errors": {"<subtype>": [ "is invalid"]},
+					"errors": {"subtype": [ "is invalid"]},
 					"code": 1005,
 					"description": "Input Validation Error"
 				}
 			},
 			"BadRequestPayloadExample": {
-				"summary": "BadRequestPayload",
+				"summary": "InvalidRequestPayload",
 				"value": {
-					"errors": {"payload.<key>.<subkey>": [ "invalid"]},
+					"errors": {"payload.importSource.importTimestamp": [ "invalid"]},
 					"code": 1030,
 					"description": "Payload Validation Error"
 				}
@@ -4032,7 +4246,7 @@
 				}
 			},
 			"BadRequestGroupExample": {
-				"summary": "BadRequestGroup",
+				"summary": "InvalidRequestGroup",
 				"value": {
 					"errors": {"group": [ "group not expected for each given subtype" ]},
 					"code": 1005,
@@ -4040,7 +4254,7 @@
 				}
 			},
 			"BadRequestNameExample": {
-				"summary": "BadRequestName",
+				"summary": "InvalidRequestName",
 				"value": {
 					"errors": {"name": [ "name not expected for each given subtype"]},
 					"code": 1005,
@@ -4048,7 +4262,7 @@
 				}
 			},
 			"BadRequestFavoriteExample": {
-				"summary": "BadRequestFavorite",
+				"summary": "InvalidRequestFavorite",
 				"value": {
 					"errors": {"favorite": [ "favorite query param can only be true. favorite=false not supported"]},
 					"code": 1005,
@@ -4082,7 +4296,7 @@
 			"BadRequestInvalidDateTimeExample": {
 				"summary": "InvalidDateTime",
 				"value": {
-					"errors": {"<param_name>": [ "must be a valid XML Schema dateTime"]},
+					"errors": {"updated_since": [ "must be a valid XML Schema dateTime"]},
 					"code": 1005,
 					"description": "Input Validation Error"
 				}
@@ -4103,6 +4317,14 @@
 					"description": "Resource already exists"
 				}
 			},
+			"AlbumResourceExistsErrorExample": {
+				"summary": "ResourceExistsError",
+				"value": {
+					"errors": {"album": [ "already exists"]},
+					"code": 1002,
+					"description": "Resource already exists"
+				}
+			},
 			"ForbiddenAccountExample": {
 				"summary": "Forbidden Account",
 				"value": {
@@ -4116,6 +4338,51 @@
 					"errors": {"<asset_id>": [ "quota exceeded"]},
 					"code": 1043,
 					"description": "Too many assets"
+					
+				}
+			},
+			"AccountNotFoundExample": {
+				"summary": "ResourceNotFoundError",
+				"value": {
+					"errors": {"account": [ "does not exist"]},
+					"code": 1000,
+					"description": "Resource not found"
+					
+				}
+			},
+			"CatalogNotFoundExample": {
+				"summary": "ResourceNotFoundError",
+				"value": {
+					"errors": {"catalog": [ "does not exist"]},
+					"code": 1000,
+					"description": "Resource not found"
+					
+				}
+			},
+			"AssetNotFoundExample": {
+				"summary": "ResourceNotFoundError",
+				"value": {
+					"errors": {"asset": [ "does not exist"]},
+					"code": 1000,
+					"description": "Resource not found"
+					
+				}
+			},
+			"RenditionNotFoundExample": {
+				"summary": "ResourceNotFoundError",
+				"value": {
+					"errors": {"rendition": [ "does not exist"]},
+					"code": 1000,
+					"description": "Resource not found"
+					
+				}
+			},
+			"AlbumNotFoundExample": {
+				"summary": "ResourceNotFoundError",
+				"value": {
+					"errors": {"album": [ "does not exist"]},
+					"code": 1000,
+					"description": "Resource not found"
 					
 				}
 			}
@@ -4615,6 +4882,31 @@
 					"description": {
 						"type": "string",
 						"enum": [ "Input Validation Error" ]
+					}
+				}
+			},
+			"NotFound": {
+				"type": "object",
+				"properties": {
+					"errors": {
+						"type": "object",
+						"properties": {
+							"<resource_type>": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "does not exist"]
+								}
+							}
+						}
+					},
+					"code": {
+						"type": "integer",
+						"enum": [ 1000 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Resource not found" ]
 					}
 				}
 			},

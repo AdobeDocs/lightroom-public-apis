@@ -507,11 +507,21 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CatalogAccessError"
+									"oneOf": [
+										{"$ref": "#/components/schemas/InvalidAPIKeyError"},
+										{"$ref": "#/components/schemas/AccessForbiddenError"},
+										{"$ref": "#/components/schemas/AccessForbiddenAccountStateError"}
+									]
 								},
 								"examples": {
-									"InvalidApiKey": {
+									"ForbiddenKeyError": {
 										"$ref": "#/components/examples/ForbiddenKeyExample"
+									},
+									"AccessForbiddenError": {
+										"$ref": "#/components/examples/AccessForbiddenExample"
+									},
+									"AccessForbiddenAccountStateError": {
+										"$ref": "#/components/examples/AccessForbiddenAccountStateExample"
 									}
 								}
 							}
@@ -1698,11 +1708,17 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CatalogAccessError1"
+									"oneOf": [
+										{"$ref": "#/components/schemas/InvalidAPIKeyError"},
+										{"$ref": "#/components/schemas/AccessForbiddenError"}
+									]
 								},
 								"examples": {
-									"InvalidApiKey": {
+									"ForbiddenKeyError": {
 										"$ref": "#/components/examples/ForbiddenKeyExample"
+									},
+									"AccessForbiddenError": {
+										"$ref": "#/components/examples/AccessForbiddenExample"
 									}
 								}
 							}
@@ -1994,11 +2010,21 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CatalogAccessError2"
+									"oneOf": [
+										{"$ref": "#/components/schemas/InvalidAPIKeyError"},
+										{"$ref": "#/components/schemas/AccessForbiddenError"},
+										{"$ref": "#/components/schemas/OperationNotPermittedError"}
+									]
 								},
 								"examples": {
-									"InvalidApiKey": {
+									"ForbiddenKeyError": {
 										"$ref": "#/components/examples/ForbiddenKeyExample"
+									},
+									"AccessForbiddenError": {
+										"$ref": "#/components/examples/AccessForbiddenExample"
+									},
+									"OperationNotPermittedError": {
+										"$ref": "#/components/examples/OperationNotPermittedExample"
 									}
 								}
 							}
@@ -2118,11 +2144,21 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CatalogAccessError2"
+									"oneOf": [
+										{"$ref": "#/components/schemas/InvalidAPIKeyError"},
+										{"$ref": "#/components/schemas/AccessForbiddenError"},
+										{"$ref": "#/components/schemas/OperationNotPermittedError"}
+									]
 								},
 								"examples": {
-									"InvalidApiKey": {
+									"ForbiddenKeyError": {
 										"$ref": "#/components/examples/ForbiddenKeyExample"
+									},
+									"AccessForbiddenError": {
+										"$ref": "#/components/examples/AccessForbiddenExample"
+									},
+									"OperationNotPermittedError": {
+										"$ref": "#/components/examples/OperationNotPermittedExample"
 									}
 								}
 							}
@@ -2204,11 +2240,21 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CatalogAccessError2"
+									"oneOf": [
+										{"$ref": "#/components/schemas/InvalidAPIKeyError"},
+										{"$ref": "#/components/schemas/AccessForbiddenError"},
+										{"$ref": "#/components/schemas/OperationNotPermittedError"}
+									]
 								},
 								"examples": {
-									"InvalidApiKey": {
+									"ForbiddenKeyError": {
 										"$ref": "#/components/examples/ForbiddenKeyExample"
+									},
+									"AccessForbiddenError": {
+										"$ref": "#/components/examples/AccessForbiddenExample"
+									},
+									"OperationNotPermittedError": {
+										"$ref": "#/components/examples/OperationNotPermittedExample"
 									}
 								}
 							}
@@ -2357,11 +2403,17 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CatalogAccessError1"
+									"oneOf": [
+										{"$ref": "#/components/schemas/InvalidAPIKeyError"},
+										{"$ref": "#/components/schemas/AccessForbiddenError"}
+									]
 								},
 								"examples": {
-									"InvalidApiKey": {
+									"ForbiddenKeyError": {
 										"$ref": "#/components/examples/ForbiddenKeyExample"
+									},
+									"AccessForbiddenError": {
+										"$ref": "#/components/examples/AccessForbiddenExample"
 									}
 								}
 							}
@@ -2577,11 +2629,17 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CatalogAccessError1"
+									"oneOf": [
+										{"$ref": "#/components/schemas/InvalidAPIKeyError"},
+										{"$ref": "#/components/schemas/AccessForbiddenError"}
+									]
 								},
 								"examples": {
-									"InvalidApiKey": {
+									"ForbiddenKeyError": {
 										"$ref": "#/components/examples/ForbiddenKeyExample"
+									},
+									"AccessForbiddenError": {
+										"$ref": "#/components/examples/AccessForbiddenExample"
 									}
 								}
 							}
@@ -2991,11 +3049,21 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CatalogAccessError2"
+									"oneOf": [
+										{"$ref": "#/components/schemas/InvalidAPIKeyError"},
+										{"$ref": "#/components/schemas/AccessForbiddenError"},
+										{"$ref": "#/components/schemas/OperationNotPermittedError"}
+									]
 								},
 								"examples": {
-									"InvalidApiKey": {
+									"ForbiddenKeyError": {
 										"$ref": "#/components/examples/ForbiddenKeyExample"
+									},
+									"AccessForbiddenError": {
+										"$ref": "#/components/examples/AccessForbiddenExample"
+									},
+									"OperationNotPermittedError": {
+										"$ref": "#/components/examples/OperationNotPermittedExample"
 									}
 								}
 							}
@@ -4169,6 +4237,27 @@
 					"description": "API Key is invalid"
 				}
 			},
+			"AccessForbiddenExample": {
+				"summary": "Invalid API Key",
+				"value": {
+					"code": 4300,
+					"description": "Access is forbidden"
+				}
+			},
+			"AccessForbiddenAccountStateExample": {
+				"summary": "Invalid API Key",
+				"value": {
+					"code": 4301,
+					"description": "Access forbidden due to account state of resource owner"
+				}
+			},
+			"OperationNotPermittedExample": {
+				"summary": "Invalid API Key",
+				"value": {
+					"code": 1016,
+					"description": "Requested operation not permitted"
+				}
+			},
 			"ForbiddenClientErrorExample": {
 				"summary": "Forbidden Client",
 				"value": {
@@ -4910,42 +4999,55 @@
 					}
 				}
 			},
-			"CatalogAccessError": {
+			"InvalidAPIKeyError": {
 				"type": "object",
 				"properties": {
 					"code": {
 						"type": "integer",
-						"enum": [ 403003, 4300, 4301]
+						"enum": [ 403003 ]
 					},
 					"description": {
 						"type": "string",
-						"enum": [ "API Key is invalid", "Access is forbidden", "Access forbidden due to account state of resource owner"]
+						"enum": [ "API Key is invalid" ]
 					}
 				}
 			},
-			"CatalogAccessError1": {
+			"AccessForbiddenError": {
 				"type": "object",
 				"properties": {
 					"code": {
 						"type": "integer",
-						"enum": [ 403003, 4300]
+						"enum": [ 4300 ]
 					},
 					"description": {
 						"type": "string",
-						"enum": [ "API Key is invalid", "Access is forbidden"]
+						"enum": [ "Access is forbidden" ]
 					}
 				}
 			},
-			"CatalogAccessError2": {
+			"AccessForbiddenAccountStateError": {
 				"type": "object",
 				"properties": {
 					"code": {
 						"type": "integer",
-						"enum": [ 403003, 4300, 1016]
+						"enum": [ 4301 ]
 					},
 					"description": {
 						"type": "string",
-						"enum": [ "API Key is invalid", "Access is forbidden", "Requested operation not permitted"]
+						"enum": [ "Access forbidden due to account state of resource owner" ]
+					}
+				}
+			},
+			"OperationNotPermittedError": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 1016 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Requested operation not permitted" ]
 					}
 				}
 			},

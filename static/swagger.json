@@ -4238,21 +4238,21 @@
 				}
 			},
 			"AccessForbiddenExample": {
-				"summary": "Invalid API Key",
+				"summary": "Access Forbidden",
 				"value": {
 					"code": 4300,
 					"description": "Access is forbidden"
 				}
 			},
 			"AccessForbiddenAccountStateExample": {
-				"summary": "Invalid API Key",
+				"summary": "Access Forbidden Account State",
 				"value": {
 					"code": 4301,
 					"description": "Access forbidden due to account state of resource owner"
 				}
 			},
 			"OperationNotPermittedExample": {
-				"summary": "Invalid API Key",
+				"summary": "Operation Not Permitted",
 				"value": {
 					"code": 1016,
 					"description": "Requested operation not permitted"

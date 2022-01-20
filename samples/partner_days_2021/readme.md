@@ -36,7 +36,7 @@ After setting up the sample, you will have a Node.js app that:
 
 ## Prerequisites
 
-This guide will assume that you have read the [Integration Document](https://developer.adobe.com/apis/creativecloud/lightroom/docs.html#!quickstart/integration.md).
+This guide will assume that you have read the [Integration Document](https://developer.adobe.com/lightroom/lightroom-api-docs/getting-started/create_integration/).
 
 You must also have a registered app on the Adobe Developer Console with the following settings:
 

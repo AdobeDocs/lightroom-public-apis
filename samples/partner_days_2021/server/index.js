@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
 
 app.get('/login', function(req, res){
 	/* This will prompt user with the Adobe auth screen */
-	res.redirect(`https://ims-na1.adobelogin.com/ims/authorize?client_id=${adobeApiKey}&scope=openid,AdobeID,lr_partner_apis&response_type=code&redirect_uri=https://localhost:8000/callback`)
+	res.redirect(`https://ims-na1.adobelogin.com/ims/authorize?client_id=${adobeApiKey}&scope=openid,AdobeID,lr_partner_apis,lr_partner_rendition_apis&response_type=code&redirect_uri=https://localhost:8000/callback`)
 })
 
 app.get('/callback', function(req, res){

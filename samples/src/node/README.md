@@ -8,9 +8,9 @@ This directory contains various examples using the Lightroom Services APIs in a 
 
 ### Prerequisites
 
-* Developers must create an application integration with the `Lightroom Services` as described in the [Adobe Lightroom developer documentation](https://www.adobe.io/apis/creativecloud/lightroom.html). This process will generate an `API Key` and `Client Secret`.
+* Developers must create an application integration with the `Lightroom Services` as described in the [Adobe Lightroom developer documentation](https://developer.adobe.com/apis/creativecloud/lightroom.html). This process will generate an `API Key` and `Client Secret`.
 
-* Developers must acquire an OAuth 2.0 `user access token` for a Lightroom customer as detailed in the [Adobe Developer authentication documentation](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md), with the `openid`, `lr_partner_apis` and `lr_partner_rendition_apis` scopes.
+* Developers must acquire an OAuth 2.0 `user access token` for a Lightroom customer as detailed in the [Adobe Developer authentication documentation](https://developer.adobe.com/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md), with the `openid`, `lr_partner_apis` and `lr_partner_rendition_apis` scopes.
 
 * The samples acquire the API Key and user access token through the
 `process.env.KEY` and `process.env.TOKEN` environment variables. These can be passed into the application on the command line:

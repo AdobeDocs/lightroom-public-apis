@@ -1,7 +1,7 @@
 {
 	"openapi": "3.0.1",
 	"info": {
-		"description": "Lightroom API Documentation, made available through [adobe.io](https://www.adobe.io). API Change Logs are available [here](https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/).",
+		"description": "Lightroom API Documentation, made available through [adobe.io](https://developer.adobe.com). API Change Logs are available [here](https://developer.adobe.com/lightroom/lightroom-api-docs/release-notes/).",
 		"version": "1.0.0",
 		"title": "Lightroom API Documentation",
 		"license": {

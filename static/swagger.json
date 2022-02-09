@@ -76,7 +76,29 @@
 						"$ref": "#/components/responses/ForbiddenKey"
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -271,7 +293,29 @@
  						}
  					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -543,8 +587,31 @@
 						}
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
+
 				}
 			}
 		},
@@ -732,7 +799,29 @@
 						"$ref": "#/components/responses/UnsupportedMediaType"
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			},
@@ -873,7 +962,29 @@
  						}
  					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1103,7 +1214,29 @@
  						}
  					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1211,7 +1344,29 @@
 						"$ref": "#/components/responses/UnsupportedMediaType"
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1358,7 +1513,29 @@
 						}
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1462,7 +1639,29 @@
 						}
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1632,7 +1831,29 @@
 						"$ref": "#/components/responses/UnsupportedMediaType"
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			},
@@ -1740,7 +1961,29 @@
 						}
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1868,7 +2111,29 @@
 						"$ref": "#/components/responses/UnsupportedMediaType"
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			},
@@ -2045,8 +2310,30 @@
 							}
 						}
 					},
-					"503":{
-						"$ref":"#/components/responses/ServiceUnavailable"
+					"503": {
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			},
@@ -2168,7 +2455,29 @@
 						"$ref": "#/components/responses/UnsupportedMediaType"
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			},
@@ -2261,7 +2570,29 @@
 						}
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -2438,7 +2769,29 @@
 						"$ref": "#/components/responses/UnsupportedMediaType"
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -2661,7 +3014,29 @@
 						}
 					},
 					"503": {
-						"$ref": "#/components/responses/ServiceUnavailable"
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			},
@@ -3084,8 +3459,30 @@
 							}
 						}
 					},
-					"503":{
-						"$ref":"#/components/responses/ServiceUnavailable"
+					"503": {
+						"description": "The request failed because the service is temporarily unavailable. Try again later.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"oneOf": [
+										{
+											"$ref": "#/components/responses/ServiceUnavailable"
+										},
+										{
+											"$ref": "#/components/responses/MaintenanceError"
+										}
+									]
+								},
+								"examples": {
+									"ServiceUnavailable": {
+										"$ref": "#/components/examples/ServiceUnavailableExample"
+									},
+									"MaintenanceError": {
+										"$ref": "#/components/examples/MaintenanceErrorExample"
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -3853,6 +4250,30 @@
 						}
 					}
 				}
+			},
+			"MaintenanceError": {
+				"description": "The request failed because the service is temporarily unavailable. Try again later.",
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"code": {
+									"type": "string",
+									"enum": [ "MaintenanceError" ]
+								},
+								"description": {
+									"type": "string",
+									"enum": [ "Service is unavailable" ]
+								},
+								"subtype": {
+									"type": "string",
+									"enum": [ "MaintenanceError" ]
+								}
+							}
+						}
+					}
+				}
 			}
 		},
 		"examples": {
@@ -4473,6 +4894,22 @@
 					"code": 1000,
 					"description": "Resource not found"
 					
+				}
+			},
+			"ServiceUnavailableExample": {
+				"summary": "ServiceUnavailable",
+				"value": {
+					"code": 9999,
+					"description": "Service is temporarily unavailable"
+
+				}
+			},
+			"MaintenanceErrorExample": {
+				"summary": "MaintenanceError",
+				"value": {
+					"code": "MaintenanceError",
+					"description": "Service is unavailable"
+
 				}
 			}
 		},

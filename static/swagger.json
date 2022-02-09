@@ -82,10 +82,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -299,10 +299,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -593,10 +593,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -805,10 +805,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -968,10 +968,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -1220,10 +1220,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -1350,10 +1350,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -1519,10 +1519,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -1645,10 +1645,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -1837,10 +1837,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -1967,10 +1967,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -2117,10 +2117,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -2317,10 +2317,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -2461,10 +2461,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -2576,10 +2576,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -2775,10 +2775,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -3020,10 +3020,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -3466,10 +3466,10 @@
 								"schema": {
 									"oneOf": [
 										{
-											"$ref": "#/components/responses/ServiceUnavailable"
+											"$ref": "#/components/schemas/ServiceUnavailable"
 										},
 										{
-											"$ref": "#/components/responses/MaintenanceError"
+											"$ref": "#/components/schemas/MaintenanceError"
 										}
 									]
 								},
@@ -4225,50 +4225,6 @@
 								"description": {
 									"type": "string",
 									"enum": [ "Invalid content type" ]
-								}
-							}
-						}
-					}
-				}
-			},
-			"ServiceUnavailable": {
-				"description": "The request failed because the service is temporarily unavailable. Try again later.",
-				"content": {
-					"application/json": {
-						"schema": {
-							"type": "object",
-							"properties": {
-								"code": {
-									"type": "integer",
-									"enum": [ 9999 ]
-								},
-								"description": {
-									"type": "string",
-									"enum": [ "Service is temporarily unavailable" ]
-								}
-							}
-						}
-					}
-				}
-			},
-			"MaintenanceError": {
-				"description": "The request failed because the service is temporarily unavailable. Try again later.",
-				"content": {
-					"application/json": {
-						"schema": {
-							"type": "object",
-							"properties": {
-								"code": {
-									"type": "string",
-									"enum": [ "MaintenanceError" ]
-								},
-								"description": {
-									"type": "string",
-									"enum": [ "Service is unavailable" ]
-								},
-								"subtype": {
-									"type": "string",
-									"enum": [ "MaintenanceError" ]
 								}
 							}
 						}
@@ -5638,6 +5594,36 @@
 					"description": {
 						"type": "string",
 						"enum": [ "Too many assets" ]
+					}
+				}
+			},
+			"ServiceUnavailable": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 9999 ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Service is temporarily unavailable" ]
+					}
+				}
+			},
+			"MaintenanceError": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "string",
+						"enum": [ "MaintenanceError" ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Service is unavailable" ]
+					},
+					"subtype": {
+						"type": "string",
+						"enum": [ "MaintenanceError" ]
 					}
 				}
 			},

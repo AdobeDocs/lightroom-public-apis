@@ -1287,7 +1287,7 @@
 					{
 						"name": "Content-Type",
 						"in": "header",
-						"description": "Content type. For jpeg assets, the only allowed type is 'image/jpeg'. For camera raw assets the type is 'application/octet-stream'.",
+						"description": "Content type. For jpeg assets, the only allowed type is 'image/jpeg'. For camera raw assets the type is 'application/octet-stream'. For video assets, the content-type is of the format video/* where * depends upon the video type and can contain only ASCII characters. Or the content-type of video can be application/octet-stream;video",
 						"required": true,
 						"schema": {
 							"type": "string"

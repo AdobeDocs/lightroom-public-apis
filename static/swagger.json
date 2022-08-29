@@ -709,6 +709,14 @@
 													},
 													"importTimestamp": {
 														"$ref": "#/components/schemas/iso8601DateTime"
+													},
+													"fileSize": {
+														"type": "number",
+														"description": "Size of the original asset file in bytes as imported"
+													},
+													"sha256": {
+														"type": "string",
+														"description": "SHA-256 hash of the file contents of the original asset file as imported. Required to be in all lower case characters."
 													}
 												}
 											}

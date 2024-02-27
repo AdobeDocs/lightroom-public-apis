@@ -36,6 +36,6 @@ This document provides information about new features and bug fixes with the Lig
 
 - Added new Delete Album API (DELETE)- `/v2/catalogs/{catalog_id}/albums/{album_id}`. It can be used to delete an existing album. The existing album should be created via the same client app and of subtype project or project_set.
 
-- Added new Create External Develop XMP API (PUT)- `/v2/catalogs/{catalog_id}/assets{asset_id}/xmp/develop`. It can be used to upload external xmp develop file for an asset
+- Added new Create External Develop XMP API (PUT)- `/v2/catalogs/{catalog_id}/assets/{asset_id}/xmp/develop`. It can be used to upload external xmp develop file for an asset
 
-- Added new Read External Develop XMP API (GET)- `/v2/catalogs/{catalog_id}/assets{asset_id}/xmp/develop`. It can be used to get latest external xmp develop file for an asset
+- Added new Read External Develop XMP API (GET)- `/v2/catalogs/{catalog_id}/assets/{asset_id}/xmp/develop`. It can be used to get latest external xmp develop file for an asset

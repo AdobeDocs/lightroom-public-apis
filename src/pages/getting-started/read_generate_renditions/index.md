@@ -26,13 +26,11 @@ Each photo asset has a set of JPEGs intended for application display of the late
     
 For best performance, use the smallest size possible for all application scrolling case 
 
-
 ## Workflow to generate renditions for print workflow
 
 Generate renditions for an original file asynchronously. Allowed rendition types are fullsize and 2560. Generated rendition will be deleted after 1 day automatically. Both these renditions must always be requested on demand.  First check to see if one is available, and if not create it. These renditions are not available with basic API access. Should your application require this capability, you must contact Adobe and describe your needs. Here are the details of fullsize and 2560
 - Fullsize - size of original with edits, constrained by any applied crops.
 - 2560 - 2560 pixels on long edge 
-
 
 _STEP 1_: Generate Renditions for an asset asynchronously.
 
@@ -77,7 +75,9 @@ HTTP/1.1 200
 
 It will return the bits of the rendition
 
-NOTE: Refer to the API documentation for further information about above listed APIs.
+NOTES: 
+- Images that include generative AI (Gen AI) require Content Credentials (C2PA) when they are delivered outside Adobe's services, so recipients get accurate Gen AI disclosure embedded in the file. In this print renditions workflow, that Content Credentials / Gen AI treatment is available only for fullsize renditions. Other rendition sizes or types i.e 2560 are not supported.
+- Refer to the API documentation for further information about above listed APIs.
 
 ### Generate Renditions diagrams
 ![Generate Renditions for Lightroom Assets](../../../../static/PrintWorkflow.png)

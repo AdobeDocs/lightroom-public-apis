@@ -15,4 +15,4 @@ The process for creating a new partner integration is described in detail in the
 
 3. Under the "Creative Cloud" offerings, select "Lightroom Services" and "Continue". Complete the form as directed in the [Adobe I/O OAuth Integration](https://developer.adobe.com/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/OAuthIntegration.md) documentation to obtain an API key and client secret.
 
-4. Verify access to the Lightroom Services through a [Services Health Check](../service_health_check) and by [Authenticating Customers](../authenticate_customers).
+4. Verify access to the Lightroom Services through a [Services Health Check](../service-health-check/index.md) and by [Authenticating Customers](../authenticate-customers/index.md).

@@ -15,7 +15,7 @@ You've got a place to start discussions.
 
 <DiscoverBlock slots="image, heading, link, text" width="25%"/>
 
-![Adobe Experience Cloud](experience_cloud.png)
+![Adobe Experience Cloud](experience-cloud.png)
 
 ### Developer forum
 

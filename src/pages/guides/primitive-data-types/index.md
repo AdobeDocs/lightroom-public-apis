@@ -20,7 +20,7 @@ A *user-visible string* is interpreted to mean any string that is valid in JSON,
 * UTF8 encoding is expected.
 * Unicode control characters (including CR, LF, tab) are disallowed.
 * Clients are expected to display these as user-visible strings without further interpretation. Clients are responsible for escaping strings to prevent unwanted interpretations.
-* This is specifically _not_ formatted HTML. Any HTML markup that might be entered into the string should _not_ cause the corresponding HTML formatting to occur. Clients are responsible for escaping characters such as <, >, and & to prevent browser side effects.
+* This is specifically _not_ formatted HTML. Any HTML markup that might be entered into the string should _not_ cause the corresponding HTML formatting to occur. Clients are responsible for escaping characters such as `<`, `>`, and `&` to prevent browser side effects.
 * User-visible strings must be non-empty.
 * Some of these restrictions might be overridden in specific cases.
 

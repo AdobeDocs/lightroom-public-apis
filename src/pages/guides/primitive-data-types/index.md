@@ -11,7 +11,7 @@ This page describes data types whose definitions may not be commonly recognized.
 
 ### Lowercase UUID
 
-A <a target="new" href="http://en.wikipedia.org/wiki/Universally_unique_identifier"> universally-unique identifier</a> where the hex digits are represented using lower case letters and the hyphens are omitted. Used to identify virtually all objects in the Lightroom cloud.
+A [universally-unique identifier](http://en.wikipedia.org/wiki/Universally_unique_identifier) where the hex digits are represented using lower case letters and the hyphens are omitted. Used to identify virtually all objects in the Lightroom cloud.
 
 ### User-visible string
 

@@ -61,7 +61,7 @@ With a body of the form:
 }
 ```
 
-See the [generic data model page](../guides/common_data_model/) for descriptions of common fields. At the top level of the object is a `serviceId` that must be set to the API key of the partner application. The `payload.name` field holds a user-visible string that will be shown in Lightroom clients when they present the project album.
+See the [generic data model page](../../guides/common-data-model/index.md) for descriptions of common fields. At the top level of the object is a `serviceId` that must be set to the API key of the partner application. The `payload.name` field holds a user-visible string that will be shown in Lightroom clients when they present the project album.
 
 The `publishInfo` clause is the place for partner applications to persist information in the Lightroom catalog regarding external content that is affiliated with the project album. Its fields are:
 

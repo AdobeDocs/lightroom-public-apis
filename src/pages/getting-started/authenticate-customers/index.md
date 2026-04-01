@@ -29,6 +29,6 @@ Authorization through the Adobe Identify Management System is working as expecte
 
 ## Authorization Workflow Diagrams
 
-![OAUTH flow diagram for Lightroom Partner Integration](../../../../static/OAuthFlowDiagram.png)
+![OAUTH flow diagram for Lightroom Partner Integration](images/o-auth-flow-diagram.png)
 
-![IMS Token Usage](../../../../static/IMS_Authorization_flow.png)
+![IMS Token Usage](images/i-m-s-authorization-flow.png)

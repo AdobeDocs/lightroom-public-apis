@@ -326,6 +326,6 @@ The Lightroom APIs may return these errors that are specific to the upload APIs:
   }
   ```
 ## Upload workflow diagrams
-![User logged in from partner application to Lightroom](../../../../static/UserLoggedInFromPartnerAppToLR.png)
-![Auto-upload of images or video from partner app to Lightroom](../../../../static/AutoUploadFromPartnerAppToLR.png)
-![Bulk-upload of selected images or video from partner app to Lightroom](../../../../static/BulkUploadOfSelectedAssetsFromPartnerAppToLR.png)
+![User logged in from partner application to Lightroom](images/user-logged-in-from-partner-app-to-lr.png)
+![Auto-upload of images or video from partner app to Lightroom](images/auto-upload-from-partner-app-to-l-r.png)
+![Bulk-upload of selected images or video from partner app to Lightroom](images/bulk-upload-of-selected-assets-from-partner-app-to-lr.png)

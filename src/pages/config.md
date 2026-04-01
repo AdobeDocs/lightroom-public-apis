@@ -1,0 +1,28 @@
+- pathPrefix:
+    - /lightroom/lightroom-api-docs/
+
+- pages:
+    - [Lightroom API Overview](/index.md)
+    - [Get Started](/getting-started/index.md)
+    - [Guides](/guides/index.md)
+    - [Code Samples](/code-sample/index.md)
+    - [API Reference](/api/index.md)
+    - [Release Notes](/release-notes/index.md)
+
+- subPages:
+    - [Getting Started](/getting-started/index.md)
+        - [Create an Integration](/getting-started/create_integration/index.md)
+        - [Services Health Check](/getting-started/service_health_check/index.md)
+        - [Authenticate Customers](/getting-started/authenticate_customers/index.md)
+        - [Upload Content](/getting-started/upload_content/index.md)
+        - [Manage Content](/getting-started/manage_content/index.md)
+        - [Read and Generate Renditions](/getting-started/read_generate_renditions/index.md)
+        - [Developer Guidelines](/getting-started/developer_guidelines/index.md)
+        - [Branding Guidelines](/getting-started/branding_guidelines/index.md)
+    - [Using the Lightroom APIs](/guides/index.md)
+        - [Calling a Lightroom API](/guides/calling_api/index.md)
+        - [Primitive Data Types](/guides/primitive_data_types/index.md)
+        - [Common Data Model](/guides/common_data_model/index.md)
+        - [Links and Pagination](/guides/links_and_pagination/index.md)
+    - [Sample Code](/code-sample/index.md)
+    - [API Change Logs](/release-notes/index.md)

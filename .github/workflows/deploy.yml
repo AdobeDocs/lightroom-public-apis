@@ -10,9 +10,9 @@ on:
         description: "Select environment to deploy to"
         type: choice
         required: true
-        default: "stage"
+        default: "prod"
         options:
-          - "stage"
+          - "prod"
           - "stage & prod"
       baseSha:
         description: "Use base SHA commit to deploy from (empty string defaults to last commit before HEAD)"

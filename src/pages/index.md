@@ -5,7 +5,7 @@ contributors:
   - https://github.com/bagra98 
 ---
 
-<Hero slots="heading, text" background="rgb(64, 34, 138)"/>
+<Superhero slots="heading, text" background="rgb(64, 34, 138)"/>
 
 # Adobe Lightroom API
 

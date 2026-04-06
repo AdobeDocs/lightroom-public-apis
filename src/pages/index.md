@@ -5,7 +5,7 @@ contributors:
   - https://github.com/bagra98 
 ---
 
-<Hero slots="heading, text" background="rgb(64, 34, 138)"/>
+<Superhero slots="heading, text" background="rgb(64, 34, 138)"/>
 
 # Adobe Lightroom API
 
@@ -15,14 +15,14 @@ Build applications that work with Lightroom
 
 #### Resources
 
-* [API Documentation](api/)
+* [API Documentation](api/index.md)
 * [Adobe Lightroom Github Repo](https://github.com/AdobeDocs/lightroom-public-apis)
 
 ## Welcome to Lightroom API!
 
 Adobe Photoshop Lightroom stores user assets, with their associated metadata and media renditions, in a catalog in the cloud.
 
-The [Getting Started](getting-started/) page will walk you through how to use our API.
+The [Getting Started](getting-started/index.md) page will walk you through how to use our API.
 
 ## Contributing 
 

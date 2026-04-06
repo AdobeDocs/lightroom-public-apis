@@ -11,7 +11,7 @@ Registered partner applications are entitled to access Lightroom customer conten
 
 **Note: _Following best security practices, user access tokens or refresh tokens must  be stored in any backend service in a secure format with encryption at rest._**
 
-The OAuth workflow is described in detail in the [Adobe IMS Authentication and Authorization](https://developer.adobe.com/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md) documentation. It requires an API key and client secret obtained by [Creating an Integration](../create_integration).
+The OAuth workflow is described in detail in the [Adobe IMS Authentication and Authorization](https://developer.adobe.com/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md) documentation. It requires an API key and client secret obtained by [Creating an Integration](../create-integration/index.md).
 
 Partner applications must include the `lr_partner_apis` and `lr_partner_rendition_apis` scope (along with the standard `openid` and `AdobeID` scopes) to access the Lightroom Services.
 
@@ -29,6 +29,6 @@ Authorization through the Adobe Identify Management System is working as expecte
 
 ## Authorization Workflow Diagrams
 
-![OAUTH flow diagram for Lightroom Partner Integration](../../../../static/OAuthFlowDiagram.png)
+![OAUTH flow diagram for Lightroom Partner Integration](images/o-auth-flow-diagram.png)
 
-![IMS Token Usage](../../../../static/IMS_Authorization_flow.png)
+![IMS Token Usage](images/i-m-s-authorization-flow.png)

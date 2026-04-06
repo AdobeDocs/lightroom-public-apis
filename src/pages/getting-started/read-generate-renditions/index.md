@@ -80,4 +80,4 @@ NOTES:
 - Refer to the API documentation for further information about above listed APIs.
 
 ### Generate Renditions diagrams
-![Generate Renditions for Lightroom Assets](../../../../static/PrintWorkflow.png)
+![Generate Renditions for Lightroom Assets](images/print-workflow.png)

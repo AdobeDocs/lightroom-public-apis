@@ -35,6 +35,8 @@ contributors:
 
 - Responses with a 500 may indicate a temporary error condition and should be retried, after backing off. 
 
+- Responses with a 429 indicate too many requests. The response body will be empty. Retry after a brief delay using exponential backoff.
+
 - Retries should be limited - 3  
 
 - See https://status.adobe.com/ for system status 

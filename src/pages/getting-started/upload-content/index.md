@@ -283,6 +283,8 @@ The Lightroom APIs may return these errors that a shared among all of the entry 
 
 - _Service error_: Calling an API results in an `HTTP 5XX` error. The partner application should retry the request with an exponential timing backoff to give the service time to be restored.
 
+- _Too many requests_: Calling an API results in an `HTTP 429` error. The response body will be empty. The partner application should retry the request after a brief delay using exponential backoff.
+
 ## Error conditions applicable for specific APIs
 
 The Lightroom APIs may return these errors that are specific to the upload APIs:

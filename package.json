@@ -1,14 +1,15 @@
 {
-  "name": "dev-docs-template",
+  "private": true,
+  "name": "lightroom-public-api",
   "version": "1.0.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AdobeDocs/dev-docs-template"
+    "url": "https://github.com/AdobeDocs/lightroom-public-apis"
   },
   "author": {
-    "name": "Tim Kim",
-    "url": "https://github.com/timkim"
+    "name": "Samyak Bagra",
+    "url": "https://github.com/bagra98"
   },
   "engines": {
     "node": "^24.11.0"

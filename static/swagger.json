@@ -554,7 +554,9 @@
 									"oneOf": [
 										{"$ref": "#/components/schemas/InvalidAPIKeyError"},
 										{"$ref": "#/components/schemas/AccessForbiddenError"},
-										{"$ref": "#/components/schemas/AccessForbiddenAccountStateError"}
+										{"$ref": "#/components/schemas/AccessForbiddenAccountStateError"},
+										{"$ref": "#/components/schemas/UnexpectedEntitlementError"},
+										{"$ref": "#/components/schemas/EntitlementExpiredError"}
 									]
 								},
 								"examples": {
@@ -566,6 +568,12 @@
 									},
 									"AccessForbiddenAccountStateError": {
 										"$ref": "#/components/examples/AccessForbiddenAccountStateExample"
+									},
+									"UnexpectedEntitlementError": {
+										"$ref": "#/components/examples/UnexpectedEntitlementExample"
+									},
+									"EntitlementExpiredError": {
+										"$ref": "#/components/examples/EntitlementExpiredExample"
 									}
 								}
 							}
@@ -4628,6 +4636,28 @@
 					"description": "Access forbidden due to account state of resource owner"
 				}
 			},
+			"UnexpectedEntitlementExample": {
+				"summary": "Unexpected Entitlement (string code)",
+				"value": {
+					"code": "UnexpectedEntitlementError",
+					"description": "Account is in an unexpected status",
+					"errors": {
+						"catalog": [ "not allowed" ]
+					},
+					"subtype": "UnexpectedEntitlementError"
+				}
+			},
+			"EntitlementExpiredExample": {
+				"summary": "Entitlement Expired (string code)",
+				"value": {
+					"code": "EntitlementExpiredError",
+					"description": "Resources unavailable because owner account entitlement has expired",
+					"errors": {
+						"catalog": [ "not allowed" ]
+					},
+					"subtype": "EntitlementExpiredError"
+				}
+			},
 			"OperationNotPermittedExample": {
 				"summary": "Operation Not Permitted",
 				"value": {
@@ -5428,6 +5458,68 @@
 					"description": {
 						"type": "string",
 						"enum": [ "Access forbidden due to account state of resource owner" ]
+					}
+				}
+			},
+			"UnexpectedEntitlementError": {
+				"type": "object",
+				"description": "Returned when the resource owner's account is in an unexpected entitlement state for the requested operation (for example, a partner request on behalf of an account that is not an active subscriber).",
+				"properties": {
+					"code": {
+						"type": "string",
+						"enum": [ "UnexpectedEntitlementError" ],
+						"description": "For this error the code is returned as a string. Note that an error code may be either an integer or a string, so clients should not assume it is always an integer."
+					},
+					"subtype": {
+						"type": "string",
+						"enum": [ "UnexpectedEntitlementError" ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Account is in an unexpected status" ]
+					},
+					"errors": {
+						"type": "object",
+						"properties": {
+							"catalog": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "not allowed" ]
+								}
+							}
+						}
+					}
+				}
+			},
+			"EntitlementExpiredError": {
+				"type": "object",
+				"description": "Returned when the resource owner's account entitlement has expired (for example, an account whose subscription has lapsed).",
+				"properties": {
+					"code": {
+						"type": "string",
+						"enum": [ "EntitlementExpiredError" ],
+						"description": "For this error the code is returned as a string. Note that an error code may be either an integer or a string, so clients should not assume it is always an integer."
+					},
+					"subtype": {
+						"type": "string",
+						"enum": [ "EntitlementExpiredError" ]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Resources unavailable because owner account entitlement has expired" ]
+					},
+					"errors": {
+						"type": "object",
+						"properties": {
+							"catalog": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"enum": [ "not allowed" ]
+								}
+							}
+						}
 					}
 				}
 			},

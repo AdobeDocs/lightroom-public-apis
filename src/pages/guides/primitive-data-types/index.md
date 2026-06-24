@@ -9,6 +9,10 @@ contributors:
 
 This page describes data types whose definitions may not be commonly recognized. Unless otherwise stated, these are expressed as strings in the JSON content traversing the Lightroom APIs.
 
+### Error code
+
+When a request fails, the error response body includes a `code` field that identifies the error. This `code` may be returned as **either an integer or a string** depending on the error (for example, `4301` or `"UnexpectedEntitlementError"`). Clients should not assume the `code` is always an integer, and should handle both types when parsing error responses.
+
 ### Lowercase UUID
 
 A [universally-unique identifier](http://en.wikipedia.org/wiki/Universally_unique_identifier) where the hex digits are represented using lower case letters and the hyphens are omitted. Used to identify virtually all objects in the Lightroom cloud.

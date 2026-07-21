@@ -1751,11 +1751,11 @@
 												"enum": [
 													"image/jpeg"
 												],
-												"description": "Output format. Only JPEG is currently supported."
+												"description": "Output format. Only JPEG is currently supported. Optional (defaults to JPEG)"
 											},
 											"gain_map": {
 												"type": "boolean",
-												"description": "Whether to embed an HDR gain map in the exported JPEG, if available."
+												"description": "Whether to embed an HDR gain map in the exported JPEG, if available. Optional (defaults to false)"
 											}
 										}
 									},
@@ -1838,6 +1838,8 @@
 										{"$ref": "#/components/schemas/InvaildRequestGUID"},
 										{
 											"type": "object",
+											"required": ["code", "description"],
+											"additionalProperties": false,
 											"properties": {
 												"errors": {
 													"type": "object",
@@ -1888,6 +1890,8 @@
 										{"$ref": "#/components/schemas/NotFound"},
 										{
 											"type": "object",
+											"required": ["code", "description"],
+											"additionalProperties": false,
 											"properties": {
 												"errors": {
 													"type": "object"

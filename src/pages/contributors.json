@@ -11,7 +11,7 @@
         "https://avatars.githubusercontent.com/u/8264341?v=4",
         "https://avatars.githubusercontent.com/u/57922?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/api/",
@@ -20,7 +20,7 @@
         "https://avatars.githubusercontent.com/u/89960477?v=4",
         "https://avatars.githubusercontent.com/u/57922?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/code-sample/",
@@ -34,7 +34,7 @@
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/getting-started/",
@@ -43,63 +43,65 @@
         "https://avatars.githubusercontent.com/u/8264341?v=4",
         "https://avatars.githubusercontent.com/u/89960477?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/getting-started/authenticate-customers/",
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/getting-started/branding-guidelines/",
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/getting-started/create-integration/",
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/getting-started/developer-guidelines/",
       "avatars": [
+        "https://avatars.githubusercontent.com/u/4817405?v=4",
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/25/2026"
     },
     {
       "page": "/getting-started/manage-content/",
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/getting-started/read-generate-renditions/",
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/getting-started/service-health-check/",
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/getting-started/upload-content/",
       "avatars": [
+        "https://avatars.githubusercontent.com/u/4817405?v=4",
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/25/2026"
     },
     {
       "page": "/guides/",
@@ -114,21 +116,21 @@
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/guides/common-data-model/",
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/guides/links-and-pagination/",
       "avatars": [
         "https://avatars.githubusercontent.com/u/14320591?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/guides/primitive-data-types/",
@@ -152,7 +154,7 @@
         "https://avatars.githubusercontent.com/u/89960477?v=4",
         "https://avatars.githubusercontent.com/u/57922?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/support/community/",
@@ -160,7 +162,7 @@
         "https://avatars.githubusercontent.com/u/14320591?v=4",
         "https://avatars.githubusercontent.com/u/57922?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/support/contribute/",
@@ -168,7 +170,7 @@
         "https://avatars.githubusercontent.com/u/14320591?v=4",
         "https://avatars.githubusercontent.com/u/57922?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     },
     {
       "page": "/support/FAQ/",
@@ -176,7 +178,7 @@
         "https://avatars.githubusercontent.com/u/14320591?v=4",
         "https://avatars.githubusercontent.com/u/57922?v=4"
       ],
-      "lastUpdated": "4/1/2026"
+      "lastUpdated": "4/6/2026"
     }
   ],
   ":type": "sheet"

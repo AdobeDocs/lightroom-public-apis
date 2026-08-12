@@ -1680,7 +1680,7 @@
 					"Assets"
 				],
 				"summary": "Generate a signed export for an asset",
-				"description": "Generate an export rendition of an asset asynchronously, optionally embedding a signed C2PA Content Credentials manifest. Allowed output sizes are 2048, 4096 and fullsize. Only JPEG output is supported.",
+				"description": "Generate an export rendition of an asset asynchronously, optionally embedding a signed C2PA Content Credentials manifest. Allowed output sizes are 2048, 4096 and fullsize. Only JPEG output is supported. The generated export is available for 24 hours after creation; after that it expires and is no longer retrievable.",
 				"operationId": "generateExport",
 				"parameters": [
 					{
@@ -1803,7 +1803,7 @@
 				},
 				"responses": {
 					"202": {
-						"description": "Accepted.(Client needs to poll on export link in response and accessing it might not immediately return a success response.)",
+						"description": "Accepted.(Client needs to poll on export link in response and accessing it might not immediately return a success response.) Note: the export is only available for 24 hours after creation, after which the export link expires.",
 						"content": {
 							"application/json": {
 								"schema": {
